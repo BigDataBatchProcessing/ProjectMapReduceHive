@@ -15,9 +15,9 @@ W wynikowym zbiorze `(3)` powinny znaleźć się cztery atrybuty:
 
 ## Program Hive (5)  
 
-Działając na wyniku zadania MapReduce oraz zbiorze danych `datasource4` `(4)` należy powiązać dane o lotach z informacjami o lotniskach, a następnie obliczyć zestawienia na poziomie krajów.  
+Działając na wyniku zadania MapReduce `(3)` oraz zbiorze danych `datasource4` `(4)` należy powiązać dane o lotach z informacjami o lotniskach, a następnie obliczyć zestawienia na poziomie krajów.  
 
-Dla każdego kraju należy wyznaczyć łączną liczbę lotów oraz średnią cenę biletu, a następnie – w ramach każdego kontynentu – nadać krajom pozycje w rankingu według liczby lotów.  
+Dla każdego kraju należy wyznaczyć łączną liczbę lotów wychodzących oraz średnią cenę biletu, a następnie – w ramach każdego kontynentu – nadać krajom pozycje w rankingu według liczby lotów.  
 
 Wynik `(6)` powinien zawierać następujące atrybuty:  
 
@@ -27,6 +27,4 @@ Wynik `(6)` powinien zawierać następujące atrybuty:
 * `avg_ticket_price` – średnia cena biletu dla lotów z danego kraju,  
 * `rank_in_continent` – pozycja kraju w rankingu liczby lotów w ramach danego kontynentu.  
 
----
-
-Cyfry w nawiasach odnoszą się do cyfr wykorzystanych na graficznej reprezentacji projektu – patrz opis projektu na stronie kursu.
+Cyfry w nawiasach odnoszą się do cyfr wykorzystanych na graficznej reprezentacji projektu – patrz opis projektu na stronie kursu. 

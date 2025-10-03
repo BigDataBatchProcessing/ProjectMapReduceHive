@@ -4,6 +4,7 @@ W ramach projektu ***MapReduce, Hive*** każda osoba ma przyporządkowany zestaw
 
 Poniżej znajdują się linki prowadzące do opisu celu przetwarzania dla poszczególnych zestawów danych
 
+* [Zestaw 0 - hotels-reservations](Zestaw%200%20-%20hotels-reservations/README.md)
 * [Zestaw 1 - imdb-genres](Zestaw%201%20-%20imdb-genres/README.md)
 * [Zestaw 2 - nyc-taxi](Zestaw%202%20-%20nyc-taxi/README.md)
 * [Zestaw 3 - nyc-accidents](Zestaw%203%20-%20nyc-accidents/README.md)
