@@ -6,17 +6,17 @@ Działając na zbiorze `datasource1` `(1)` należy wyznaczyć podstawowe statyst
 
 Dane powinny zostać pogrupowane według:  
 * identyfikatora szpitala (`hospital_id`),  
-* diagnozy (`disease`).  
+* roku wizyty (`year`).  
 
 W ramach każdej grupy należy obliczyć dwie miary:  
-* `total_patients` – liczba wizyt pacjentów z daną diagnozą w szpitalu,  
-* `avg_treatment_cost` – średni koszt leczenia dla danej diagnozy w szpitalu.  
+* `total_patients` – liczba wizyt pacjentów w danym roku i szpitalu,  
+* `avg_age` – średni wiek pacjentów w danym roku i szpitalu.  
 
 W wynikowym zbiorze `(3)` powinny znaleźć się cztery atrybuty:  
 * `hospital_id` – identyfikator szpitala,  
-* `disease` – kod choroby (ICD-10),  
+* `year` – kod choroby (`YYYY`),  
 * `total_patients` – liczba wizyt pacjentów w danej grupie,  
-* `avg_treatment_cost` – średni koszt leczenia w USD.  
+* `avg_age` – średni wiek pacjentów w danej grupie.  
 
 ---
 
@@ -28,7 +28,7 @@ Na podstawie tych danych należy wyliczyć zestawienia na poziomie regionów i t
 
 Dla każdego regionu i typu szpitala należy obliczyć:  
 * łączną liczbę pacjentów obsłużonych w regionie w ramach danego typu szpitala,  
-* średni koszt leczenia pacjentów obsłużonych w regionie w ramach danego typu szpitala.    
+* średni wiek pacjentów obsłużonych w regionie w ramach danego typu szpitala.    
 
 Dodatkowo – w ramach każdego regionu – należy określić ranking typów szpitali według liczby obsłużonych pacjentów.  
 
@@ -36,7 +36,7 @@ Wynik `(6)` powinien zawierać następujące atrybuty:
 * `region` – region,  
 * `hospital_type` – typ szpitala (np. *General*, *Specialist*, *Clinic*),  
 * `total_patients` – łączna liczba pacjentów w regionie dla danego typu szpitala,  
-* `avg_treatment_cost` – średni koszt leczenia w USD,  
+* `avg_age` – średni wiek pacjentów,  
 * `rank_in_region` – pozycja typu szpitala w rankingu liczby obsłużonych pacjentów w ramach danego regionu.  
 
 ---
