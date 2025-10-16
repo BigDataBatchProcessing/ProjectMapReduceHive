@@ -1,4 +1,4 @@
-# Zestaw 20 – parks-visits
+# Zestaw 21 – parks-visits
 
 ## Program MapReduce (2)
 
