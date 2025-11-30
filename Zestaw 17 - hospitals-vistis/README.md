@@ -14,7 +14,7 @@ W ramach każdej grupy należy obliczyć dwie miary:
 
 W wynikowym zbiorze `(3)` powinny znaleźć się cztery atrybuty:  
 * `hospital_id` – identyfikator szpitala,  
-* `year` – kod choroby (`YYYY`),  
+* `year` – rok wizyty (`YYYY`),  
 * `total_patients` – liczba wizyt pacjentów w danej grupie,  
 * `avg_age` – średni wiek pacjentów w danej grupie.  
 

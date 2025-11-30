@@ -9,14 +9,14 @@ Dane powinny zostać pogrupowane według:
 * rodzaju płatności.  
 
 W ramach każdej grupy należy obliczyć dwie miary:  
-* łączną liczbę sprzedanych sztuk (`SUM(quantity)`),  
-* średnią wartość jednostkowej ceny (`AVG(unit_price)`).  
+* łączną liczbę sprzedanych sztuk,  
+* średnią wartość jednostkowej ceny produktu.  
 
 W wynikowym zbiorze `(3)` powinny znaleźć się cztery atrybuty:  
 * `product_id` – identyfikator produktu,  
 * `payment_type` – typ płatności,  
 * `total_quantity` – liczba sprzedanych sztuk,  
-* `avg_unit_price` – średnia cena jednostkowa.  
+* `avg_unit_price` – średnia cena jednostkowa produktu.  
 
 ---
 

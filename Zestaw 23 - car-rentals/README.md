@@ -26,7 +26,7 @@ Działając na wyniku zadania MapReduce `(3)` oraz zbiorze danych `datasource4` 
 
 Na podstawie tych danych należy wyliczyć, dla każdej kombinacji cecha samochodu (`feature`) i roku (`rental_year`):  
 * `feature_year_avg_rentals` – średnia liczba wypożyczeń samochodów w grupie cecha + rok,  
-* `feature_year_avg_completed_ratio` – średni udział wypożyczeń zakończonych statusem `Completed` w przypadku samochodów w grupie cecha + rok,  
+* `feature_year_avg_completed_ratio` – średni udział wypożyczeń zakończonych statusem `Completed` samochodów w grupie cecha + rok,  
 * `above_avg_rentals` – flaga logiczna (`true/false`), określająca, czy średnia liczba wypożyczeń w grupie cecha + rok jest wyższa niż średnia liczba wypożyczeń dla tej cechy biorąc pod uwagę wszystkie lata.
 
 Wynik `(6)` powinien zawierać następujące atrybuty:  
