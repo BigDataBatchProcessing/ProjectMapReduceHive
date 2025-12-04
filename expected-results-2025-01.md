@@ -119,7 +119,8 @@ Poniżej dla każdego etapu podano
 
 | genre  | film_title                  | total_views | pct_film_watch_time | pct_genre_watch_time |
 |--------|-----------------------------|-------------|--------------------|--------------------|
-| Action | A Many-Splendoured Thing    | 102         | 0.193471           | 0.151749           |
+| Action | A Many-Splendoured Thing    | 102         | 0.773885           | 0.606998
+           |
 
 
 # Zestaw 17 - hospitals-vistis
