@@ -178,7 +178,7 @@ Poniżej dla każdego etapu podano
 
 | region         | date       | region_day_avg_temp | region_avg_temp | avg_temp_deviation |
 |----------------|------------|-------------------|----------------|------------------|
-| Dolnośląskie   | 2020-11-13 | 15.066667         | 6.130899       | 8.935768         |
+| Dolnośląskie   | 2020-11-13 | 15.05             | 6.239733       | 8.810267         |
 
 
 # Zestaw 20 - library-borrowings
