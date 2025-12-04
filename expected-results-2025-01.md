@@ -98,9 +98,10 @@ Poniżej dla każdego etapu podano
 
 | country | cuisine | total_orders | avg_total_price | rank_in_country |
 |---------|---------|--------------|----------------|----------------|
-| Algeria | Chinese | 264          | 81.818101      | 1              |
+| Algeria | Chinese | 264          | 82.108295      | 1              |
 
-
+> Uwagi
+> * istnieje teoria, że liczba wierszy powinna być 194 
 
 # Zestaw 16 - film-views
 ## Etap *MapReduce*
