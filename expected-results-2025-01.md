@@ -139,7 +139,7 @@ Poniżej dla każdego etapu podano
 
 | country                                      | hospital_type | total_patients | avg_age    | rank_in_country |
 |----------------------------------------------|---------------|----------------|------------|----------------|
-| Antarctica (the territory South of 60 deg S) | Clinic        | 979            | 49.134977  | 1              |
+| Antarctica (the territory South of 60 deg S) | Clinic        | 979            | 49.390194  | 1              |
 
 
 
@@ -253,5 +253,5 @@ Poniżej dla każdego etapu podano
 
 | feature           | rental_year | feature_year_avg_rentals | feature_year_avg_completed_ratio | feature_avg_rentals_all_years | above_avg_rentals |
 |------------------|-------------|-------------------------|---------------------------------|-------------------------------|------------------|
-| Air Conditioning | 2020        | 7.064516                | 0.333333                        | 42.08871                      | 0                |
+| Air Conditioning | 2020        | 7.064516                | 0.351518                        | 42.08871                      | 0                |
 
