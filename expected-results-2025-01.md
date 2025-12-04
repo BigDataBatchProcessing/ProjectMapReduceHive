@@ -101,7 +101,7 @@ Poniżej dla każdego etapu podano
 | Algeria | Chinese | 264          | 82.108295      | 1              |
 
 > Uwagi
-> * istnieje teoria, że liczba wierszy powinna być 194 
+> * istnieje teoria, że liczba wierszy powinna być 194 - nie potwierdzam
 
 # Zestaw 16 - film-views
 ## Etap *MapReduce*
