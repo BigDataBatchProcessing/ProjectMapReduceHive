@@ -26,7 +26,7 @@ Poniżej dla każdego etapu podano
 
 | continent | country | total_flights | avg_ticket_price | rank_in_continent |
 |-----------|---------|----------------|-------------------|--------------------|
-| Africa    | Bahrain | 501            | 755.442511        | 8                  |
+| Africa    | Bahrain | 501            | 753.717265        | 8                  |
 
 
 # Zestaw 12 - sales-products
