@@ -216,7 +216,7 @@ Poniżej dla każdego etapu podano
 
 | nature_type | region  | total_visits | avg_group_size | avg_visits_for_type | visits_deviation |
 |-------------|---------|--------------|----------------|-------------------|-----------------|
-| Coast       | Central | 2513         | 3.968823       | 2505.0            | 8.0             |
+| Coast       | Central | 2513         | 3.986072	    | 2505.0            | 8.0             |
 
 
 # Zestaw 22 - shops-reviews
