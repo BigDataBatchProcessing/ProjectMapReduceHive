@@ -79,7 +79,7 @@ Poniżej dla każdego etapu podano
 
 | region  | service_type | total_passengers | avg_ticket_price | rank_in_region |
 |---------|--------------|-----------------|-----------------|----------------|
-| Central | Express      | 78651           | 27.422577       | 2              |
+| Central | Express      | 78651           | 27.432292       | 2              |
 
 
 # Zestaw 15 - food-orders-restaurants
