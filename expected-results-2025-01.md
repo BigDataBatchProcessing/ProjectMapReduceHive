@@ -159,7 +159,7 @@ Poniżej dla każdego etapu podano
 
 | region | hero_name | total_wins | total_draws | total_losses | avg_wins_for_hero | above_avg_wins |
 |--------|-----------|------------|-------------|--------------|------------------|----------------|
-| ASIA   | A-Bomb    | 1          | 0           | 0            | 1.000000         | 0              |
+| ASIA   | A-Bomb    | 1          | 0           | 3            | 1.000000         | 0              |
 
 
 # Zestaw 19 - stations-weather
