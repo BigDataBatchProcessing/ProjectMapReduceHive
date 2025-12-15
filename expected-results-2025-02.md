@@ -1,6 +1,6 @@
 # Oczekiwane wyniki dla danych testowych 2025-01
 
-Poniżej zamieszczone zostały oczekiwane wyniki dla zestawów danych `2025-01` dla poszczególnych ze zestawów projektów. 
+Poniżej zamieszczone zostały oczekiwane wyniki dla zestawów danych `2025-02` dla poszczególnych ze zestawów projektów. 
 
 Uwaga! 
 * Poniższe wyniki należy wykorzystywać, do ewentualnej weryfikacji wyników uzyskiwanych w projekcie 2 podczas jego IMPLEMENTACJI. 
