@@ -168,7 +168,7 @@ Poniżej dla każdego etapu podano
 
 | station_id | date | avg_temp | max_wind_speed | no_measurements |
 | :--- | :--- | :--- | :--- | :--- |
-| 014efee3-d820-48e4-81a4-06b311fc315e | 2020-12-17 | 4.433333 | 7 | 8.53 |
+| 014efee3-d820-48e4-81a4-06b311fc315e | 2020-12-17 | 4.433333 | 78.5 | 3 |
 
 
 ## Etap *Hive*
