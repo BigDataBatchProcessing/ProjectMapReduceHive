@@ -206,7 +206,7 @@ Poniżej dla każdego etapu podano
 
 | park_id | date | visits_count | avg_group_size |
 | :--- | :--- | :--- | :--- |
-| PARK0001 | 2020-12-16 | 17 | 17.0 |
+| PARK0001 | 2020-12-16 | 1 | 7.0 |
 
 
 ## Etap *Hive*
