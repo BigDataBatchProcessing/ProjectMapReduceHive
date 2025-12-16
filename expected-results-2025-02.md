@@ -196,7 +196,7 @@ Poniżej dla każdego etapu podano
 
 | genre | borrow_year | total_borrows | avg_borrow_duration | genre_year_share |
 | :--- | :--- | :--- | :--- | :--- |
-| Biography | 2020 | 9 | 132.948718 | 20.728929 |
+| Biography | 2020 | 91 | 32.948718 | 20.728929 |
 
 
 # Zestaw 21 - parks-visits
