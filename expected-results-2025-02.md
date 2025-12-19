@@ -14,13 +14,15 @@ Poniżej dla każdego etapu podano
 
 # Zestaw 11 - flights-airports
 ## Etap *MapReduce*
-93
+300
 
 | departure_airport_id   | status    |   flight_count |   avg_ticket_price |
 |:-----------------------|:----------|---------------:|-------------------:|
 | BIHN                   | Cancelled |            170 |            744.955 |
 
 ## Etap *Hive*
+93
+
 | continent   | country     |   total_flights |   avg_ticket_price |   rank_in_continent |
 |:------------|:------------|----------------:|-------------------:|--------------------:|
 | Africa      | Afghanistan |             489 |            774.662 |                  18 |
