@@ -25,4 +25,6 @@ Wynik `(6)` powinien zawierać następujące atrybuty:
 * `movies` – liczba filmów
 * `actors` – liczba aktorów
 
+---
+
 Cyfry w nawiasach odnoszą się do cyfr wykorzystanych na graficznej reprezentacji projektu – patrz opis projektu na stronie kursu. 

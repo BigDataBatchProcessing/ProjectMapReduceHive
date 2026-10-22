@@ -38,4 +38,10 @@ Wynik `(6)` powinien zawierać następujące atrybuty:
 
 ---
 
-Cyfry w nawiasach odnoszą się do cyfr wykorzystanych na graficznej reprezentacji projektu – patrz opis projektu na stronie kursu.
+## Uwagi
+
+* `avg_ticket_price` dla kraju to średnia cena biletu po wszystkich lotach wychodzących z kraju.
+* Pozycja 1 w rankingu oznacza najwięcej lotów. Równe wartości otrzymują tę samą pozycję,
+  a kolejna pozycja jest pomijana (np. 1, 2, 2, 4).
+* Cyfry w nawiasach odnoszą się do cyfr wykorzystanych na graficznej reprezentacji projektu – patrz opis projektu na stronie kursu.
+* Wyniki `(3)` i `(6)` mogą zawierać dodatkowe atrybuty, pod warunkiem że zawierają wszystkie atrybuty wymagane.

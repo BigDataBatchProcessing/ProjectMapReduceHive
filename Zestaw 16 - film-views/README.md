@@ -54,5 +54,10 @@ Wynik `(6)` powinien zawierać następujące atrybuty:
 
 ---
 
-Cyfry w nawiasach odnoszą się do cyfr wykorzystanych na graficznej reprezentacji projektu
-– patrz opis projektu na stronie kursu.
+## Uwagi
+
+* Odsłony bez oceny nie są liczone do `high_rating_count`.
+* `pct_film_watch_time` i `pct_genre_watch_time` to średnie stosunku czasu oglądania do długości
+  filmu liczone po wszystkich odsłonach (odpowiednio: filmu, filmów gatunku), wyrażone jako ułamek.
+* Wyniki `(3)` i `(6)` mogą zawierać dodatkowe atrybuty, pod warunkiem że zawierają wszystkie atrybuty wymagane.
+* Cyfry w nawiasach odnoszą się do cyfr wykorzystanych na graficznej reprezentacji projektu – patrz opis projektu na stronie kursu.

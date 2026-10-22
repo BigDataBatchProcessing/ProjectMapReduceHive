@@ -4,7 +4,7 @@
 
 Działając na zbiorze `datasource1` `(1)` należy wyznaczyć podstawowe statystyki drużyn w każdym sezonie.
 
-**Sezon** w formacie `YYYY` należy wyznaczyć na podstawie daty meczu (`match_date`) w następujący sposób:  
+**Sezon** w formacie `YYYY` należy wyznaczyć na podstawie daty meczu (`date`) w następujący sposób:  
 * Jeśli mecz odbył się między 1 sierpnia a 31 grudnia – należy przypisać rok rozpoczęcia jako rok sezonu,  
 * Jeśli mecz odbył się między 1 stycznia a 31 lipca – należy przypisać poprzedni rok jako rok rozpoczęcia sezonu.  
 
@@ -44,5 +44,13 @@ Wynik `(6)` powinien zawierać następujące atrybuty:
 
 ---
 
-Cyfry w nawiasach odnoszą się do cyfr wykorzystanych na graficznej reprezentacji projektu – patrz opis projektu na stronie kursu.
+## Uwagi
+
+* `avg_goals_per_match` dotyczy bramek strzelonych przez daną drużynę.
+* `avg_goals_per_match` dla ligi to średnia po wszystkich meczach drużyn ligi.
+* Pozycja 1 w rankingu oznacza najwięcej rozegranych meczów (wszystkie sezony łącznie).
+  Równe wartości otrzymują tę samą pozycję, a kolejna pozycja jest pomijana (np. 1, 2, 2, 4).
+  Kolejność rekordów w tablicy nie ma znaczenia.
+* Wyniki `(3)` i `(6)` mogą zawierać dodatkowe atrybuty, pod warunkiem że zawierają wszystkie atrybuty wymagane.
+* Cyfry w nawiasach odnoszą się do cyfr wykorzystanych na graficznej reprezentacji projektu – patrz opis projektu na stronie kursu.
 

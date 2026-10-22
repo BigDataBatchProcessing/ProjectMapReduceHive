@@ -50,5 +50,10 @@ Wynik `(6)` powinien zawierać następujące atrybuty:
 
 ---
 
-Cyfry w nawiasach odnoszą się do cyfr wykorzystanych na graficznej reprezentacji projektu
-– patrz opis projektu na stronie kursu.
+## Uwagi
+
+* `avg_unit_price` (w MapReduce i w Hive) to średnia cena jednostkowa ważona liczbą sprzedanych sztuk.
+* Pozycja 1 w rankingu oznacza najwięcej sprzedanych sztuk. Równe wartości otrzymują tę samą pozycję,
+  a kolejna pozycja jest pomijana (np. 1, 2, 2, 4). Kolejność rekordów w tablicy nie ma znaczenia.
+* Cyfry w nawiasach odnoszą się do cyfr wykorzystanych na graficznej reprezentacji projektu – patrz opis projektu na stronie kursu.
+* Wyniki `(3)` i `(6)` mogą zawierać dodatkowe atrybuty, pod warunkiem że zawierają wszystkie atrybuty wymagane.

@@ -51,5 +51,11 @@ Wynik `(6)` powinien zawierać następujące atrybuty:
 
 ---
 
-Cyfry w nawiasach odnoszą się do cyfr wykorzystanych na graficznej reprezentacji projektu
-– patrz opis projektu na stronie kursu.
+## Uwagi
+
+* `region_month_avg_temp` i `region_avg_temp` to średnie po wszystkich pomiarach.
+* Ranking stacji według średniej z miesięcznych wartości `avg_temp` stacji. Pozycja 1 oznacza
+  najwyższą temperaturę. Równe wartości otrzymują tę samą pozycję, a kolejna pozycja jest pomijana
+  (np. 1, 2, 2, 4). Kolejność rekordów w tablicy nie ma znaczenia.
+* Wyniki `(3)` i `(6)` mogą zawierać dodatkowe atrybuty, pod warunkiem że zawierają wszystkie atrybuty wymagane.
+* Cyfry w nawiasach odnoszą się do cyfr wykorzystanych na graficznej reprezentacji projektu – patrz opis projektu na stronie kursu.

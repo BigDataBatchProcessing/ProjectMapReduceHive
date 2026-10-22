@@ -1,0 +1,760 @@
+<h1>Zestawienie Kryteriów</h1>
+<table border="1px" style="width:95%; margin:25px auto; border-collapse:collapse; box-shadow:0 4px 8px rgba(0,0,0,0.1); border:1px solid #000;">
+    <colgroup>
+        <col style="text-align:center; padding:4px;">
+        <col style="text-align:center; padding:4px;">
+        <col style="text-align:center; padding:4px;">
+        <col style="text-align:left; padding:4px;">
+    </colgroup>
+    <thead>
+        <tr>
+            <th>Nazwa</th>
+            <th>Liczba Punktów (Max)</th>
+            <th>Waga</th>
+            <th>Treść</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Kryterium 01</td>
+            <td>1</td>
+            <td>1</td>
+            <td>
+                <div>
+                    <h5><strong>Kryterium 01</strong></h5>
+                    <p>Ocena&nbsp;programu <strong>MapReduce </strong>-&nbsp;<strong>Mapper - struktura danych wejściowych</strong></p>
+                    <p>Na początku sprawdź czy wariant implementacji (MapReduce Classic/Hadoop Streaming) zgadza się z deklaracją w opisie/temacie projektu</p>
+                    <ul>
+                        <li>jeśli tak, kontynuuj sprawdzanie&nbsp;</li>
+                        <li>jeśli nie, wówczas wszystkie kryteria dotyczące <strong>MapReduce </strong>powinny być wyzerowane :(&nbsp;</li>
+                    </ul>
+                    <p>Sprawdź czy&nbsp;<strong>Mapper </strong>prawidłowo interpretuje <strong>strukturę danych wejściowych</strong></p>
+                    <ul>
+                        <li>czy Mapper poprawnie ekstrahuje odpowiednie wartości,</li>
+                        <li>czy uwzględniony został poprawny podział pól,&nbsp;</li>
+                        <li>czy zastosowano konwersję typów (o ile była konieczna),&nbsp;</li>
+                        <li>czy uwzględniono poprawny format daty,</li>
+                        <li>itp.</li>
+                    </ul>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Kryterium 02</td>
+            <td>1</td>
+            <td>3</td>
+            <td>
+                <div>
+                    <h5><strong>Kryterium 02</strong></h5>
+                    <p>Ocena&nbsp;programu&nbsp;<strong>MapReduce&nbsp;</strong>-&nbsp;<strong>Mapper - klucz pośredni (grupowania)</strong></p>
+                    <p>Sprawdź czy klucz pośredni (grupowania) odpowiada wymaganiom zadania</p>
+                    <ul>
+                        <li>w przypadku <em>Hadoop Streaming</em>&nbsp;upewnij się czy właściwie wskazano zakres ciągu znaków obejmowany przez klucz
+                            <ul>
+                                <li>czy użyto właściwy separator (\t, ,, ;),&nbsp;</li>
+                                <li>czy jeśli był on niestandardowy, to dostosowano odpowiednio polecenie uruchamiające</li>
+                            </ul>
+                        </li>
+                        <li>w przypadku <em>MapReduce Classic</em> sprawa identyfikacji klucza powinna być prosta</li>
+                    </ul>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Kryterium 03</td>
+            <td>1</td>
+            <td>3</td>
+            <td>
+                <div>
+                    <h5><strong>Kryterium 03</strong></h5>
+                    <p>Ocena&nbsp;programu&nbsp;<strong>MapReduce&nbsp;</strong>-&nbsp;<strong>Mapper - komplet danych dla agregatów</strong></p>
+                    <p>Sprawdź czy dane przekazywane dalej zawierają wystarczające informacje do obliczenia wymaganych agregatów.</p>
+                    <p>Upewnij się, że&nbsp;Mapper przekazuje wystarczające dane do późniejszego obliczenia żądanych miar. <br><strong>Uwaga! </strong>w tym kryterium nie chodzi o możliwość agregacji wielopoziomowej. Wystarczy, że informacje dostarczane przez Mapper umożliwiają wykonanie odpowiednich obliczeń.&nbsp;</p>
+                    <p>Przykładowo:&nbsp;</p>
+                    <ul>
+                        <li>brak ceny i tylko liczba towarów, uniemożliwi obliczenie średniej ceny - kryterium niespełnione</li>
+                        <li>tylko cena i brak liczby towarów, umożliwi obliczenie średniej ceny - kryterium spełnione (mimo iż agregacja wielopoziomowa będzie niemożliwa)</li>
+                    </ul>
+                    <br>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Kryterium 04</td>
+            <td>1</td>
+            <td>2</td>
+            <td>
+                <div>
+                    <h5><strong>Kryterium 04</strong></h5>
+                    <p>Ocena&nbsp;programu&nbsp;<strong>MapReduce&nbsp;</strong>-&nbsp;<strong>Mapper - komplet danych dla agregacji wielopoziomowej</strong></p>
+                    <p>Sprawdź czy&nbsp;Mapper dostarcza wartości w postaci umożliwiającej zastosowanie agregacji wielopoziomowej (np. w wyniku zastosowania <em>combinerów</em>).</p>
+                    <ul>
+                        <li>w przypadku funkcji niedystrybutywnych (np. średnia) często nie wystarczy przekazać prostej wartości, aby dokonać wielopoziomowych obliczeń (np. potrzebujemy: sumy + liczności)</li>
+                        <li>nawet w przypadku funkcji dystrybutywnych trzeba uważać, nie zawsze wartość, na której ma być wykonane obliczenie jest dobrą daną wynikową, czasami już Mapper powinien wykonywać częściową agregację lokalną, aby mogło dojść do dalszych wielopoziomowych agregacji</li>
+                    </ul>
+                    <p><strong>Uwaga! </strong>Nie oceniamy w tym kryterium czy agregacja wielopoziomowa (combinery) została użyta. Sprawdzamy tylko, czy byłoby to możliwe na podstawie danych zwracanych przez Mapper.</p>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Kryterium 05</td>
+            <td>1</td>
+            <td>1</td>
+            <td>
+                <div>
+                    <h5><strong>Kryterium 05</strong></h5>
+                    <p>Ocena&nbsp;programu&nbsp;<strong>MapReduce&nbsp;</strong>-&nbsp;<strong>Mapper - obsługa wyjątków i błędnych danych</strong></p>
+                    <p>Sprawdź czy&nbsp;Mapper radzi sobie z niepełnymi, pustymi, uszkodzonymi lub błędnie sformatowanymi danymi, pomijając je lub oznaczając.</p>
+                    <p><strong>Uwaga!</strong> Nie ma konieczności sprawdzania wszystkich możliwych i niemożliwych wariantów problemów. Istotne jest jedynie czy jakakolwiek weryfikacja danych wejściowych i obsługa przypadków błędnych jest w sposób jawny wykonywana.&nbsp;</p>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Kryterium 06</td>
+            <td>1</td>
+            <td>1</td>
+            <td>
+                <div>
+                    <h5><strong>Kryterium 06</strong></h5>
+                    <p>Ocena&nbsp;programu&nbsp;<strong>MapReduce&nbsp;</strong>-&nbsp;<strong>Mapper - brak generowania danych błędnych lub nadmiarowych</strong></p>
+                    <p>Sprawdź:</p>
+                    <ul>
+                        <li>czy&nbsp;Mapper zawiera ewentualną selekcję danych (filtrowanie nieistotnych rekordów już na etapie mapowania),&nbsp;</li>
+                        <li>czy Mapper dokonuje ewentualnej preagregacji danych (w oparciu o wartości bieżącego źródłowego rekordu), jeśli byłoby to możliwe,&nbsp;</li>
+                        <li>czy Mapper nie generuje danych błędnych (nie wynikających ze źródłowych danych)&nbsp;</li>
+                    </ul>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Kryterium 07</td>
+            <td>1</td>
+            <td>3</td>
+            <td>
+                <div>
+                    <h5><strong>Kryterium 07</strong></h5>
+                    <p>Ocena&nbsp;programu&nbsp;<strong>MapReduce&nbsp;</strong>-&nbsp;<strong>Mapper - oszczędność pamięcowa</strong></p>
+                    <p>Sprawdź:</p>
+                    <ul>
+                        <li>czy&nbsp;Mapper nie utrzymuje struktur danych w pamięci (słowników, list) obejmujących dane spoza bieżącego źródłowego rekordu,&nbsp;</li>
+                        <li>czy Mapper przetwarza rekordy "strumieniowo", generując wyniki dla każdego rekordu źródłowego osobno.</li>
+                    </ul>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Kryterium 08</td>
+            <td>2</td>
+            <td>1</td>
+            <td>
+                <div>
+                    <h5><strong>Kryterium 08</strong></h5>
+                    <p>Ocena&nbsp;programu&nbsp;<strong>MapReduce&nbsp;</strong>-&nbsp;<strong>Mapper - czytelność i jakość implementacji</strong></p>
+                    <p>Sprawdź:</p>
+                    <ul>
+                        <li>czy&nbsp;kod jest dobrze sformatowany,</li>
+                        <li>czy kod zawiera czytelne komentarze,</li>
+                        <li>czy kod stosuje zrozumiałe i adekwatne do zawartości nazwy zmiennych i funkcji,</li>
+                        <li>czy zastosowano&nbsp;logiczną strukturę (np. walidacja → parsowanie → emisja wyników)</li>
+                    </ul>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Kryterium 09</td>
+            <td>1</td>
+            <td>1</td>
+            <td>
+                <div>
+                    <h5><strong>Kryterium 09</strong></h5>
+                    <p>Ocena&nbsp;programu&nbsp;<strong>MapReduce&nbsp;</strong>-&nbsp;<strong>Reducer - odczyt danych wejściowych</strong></p>
+                    <p>Sprawdź czy&nbsp;Reduktor poprawnie interpretuje strukturę danych wejściowych, zgodną z typem/formatem danych generowanym przez mappery.</p>
+                    <p>Upewnij się, że:&nbsp;</p>
+                    <ul>
+                        <li>właściwie uwzględniany jest format danych</li>
+                        <li>prawidłowo parsowane są wartości przekazywane z mappera, uwzględniając separatory, typy danych i kolejności pól</li>
+                        <li>w przypadku <em>MapReduce Classic</em> sprawdź deklaracje typów: w mapperze, reduktorze oraz konfiguracji zadania</li>
+                    </ul>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Kryterium 10</td>
+            <td>1</td>
+            <td>4</td>
+            <td>
+                <div>
+                    <h5><strong>Kryterium 10</strong></h5>
+                    <p>Ocena&nbsp;programu&nbsp;<strong>MapReduce&nbsp;</strong>-&nbsp;<strong>Reducer - poprawna agregacja</strong></p>
+                    <p>Sprawdź czy&nbsp;Reduktor dokonuje poprawnych agregacji, uwzględniając strukturę danych wejściowych oraz charakter obsługiwanej funkcji.</p>
+                    <p>Upewnij się, że:&nbsp;</p>
+                    <ul>
+                        <li>dla każdego klucza wykonywane są poprawne obliczenia zgodne z treścią zadania</li>
+                        <li>używane odpowiednich wzory/funkcje&nbsp;</li>
+                        <li>nie występują problemy z użyciem niepoprawnych typów danych</li>
+                        <li>w szczególności w przypadku funkcji niedystrybutywnych prawidłowo są łączone dane częściowe przekazane przez mappery/combinery.</li>
+                    </ul>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Kryterium 11</td>
+            <td>1</td>
+            <td>4</td>
+            <td>
+                <div>
+                    <h5><strong>Kryterium 11</strong></h5>
+                    <p>Ocena&nbsp;programu&nbsp;<strong>MapReduce&nbsp;</strong>-&nbsp;<strong>Reducer - oszczędność pamięciowa</strong></p>
+                    <p>Sprawdź czy Reduktor jest oszczędny pamięciowo</p>
+                    <p>Upewnij się, że:&nbsp;</p>
+                    <ul>
+                        <li>nie utrzymuje on w pamięci słowników, list ani innych struktur danych gromadzących rekordy z wielu grup/kluczy,</li>
+                        <li>przetwarza dane "strumieniowo": dla każdego klucza dokonuje agregacji, emituje wynik i przechodzi do następnej grupy/klucza</li>
+                    </ul>
+                    <br>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Kryterium 12</td>
+            <td>1</td>
+            <td>4</td>
+            <td>
+                <div>
+                    <h5><strong>Kryterium 12</strong></h5>
+                    <p>Ocena&nbsp;programu&nbsp;<strong>MapReduce&nbsp;</strong>-&nbsp;<strong>Reducer - format wyniku</strong></p>
+                    <p>Sprawdź czy Reduktor generuje dane w formacie zgodnym z wymaganiami dalszych etapów przetwarzania</p>
+                    <p>Upewnij się, że:&nbsp;</p>
+                    <ul>
+                        <li>format wynikowych danych (kolejność pól, separatory, typy danych) odpowiada specyfikacji zadania (np. nie brakuje żadnych atrybutów) i może być użyty w kolejnym etapie projektu</li>
+                        <li>nie są umieszczone w wyniku elementy uniemożliwiające jego dalsze przetwarzanie&nbsp;</li>
+                    </ul>
+                    <strong>Uwaga!</strong> Zwróć uwagę na to, że reduktor może generować dodatkowe wartości (miary) jeśli wymagane przez treść projektu elementy są niewystarczające do wykonania obliczeń na późniejszych etapach przetwarzania.&nbsp;<br><br>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Kryterium 13</td>
+            <td>1</td>
+            <td>1</td>
+            <td>
+                <div>
+                    <h5><strong>Kryterium 13</strong></h5>
+                    <p>Ocena&nbsp;programu&nbsp;<strong>MapReduce&nbsp;</strong>-&nbsp;<strong>Reducer - obsługa wyjątków i błędów</strong></p>
+                    <p>Sprawdź czy Reduktor jest odporny na błędne lub niepełne dane w grupie</p>
+                    <p>Upewnij się, że:&nbsp;</p>
+                    <ul>
+                        <li>poprawnie obsługiwane są przypadki, w których część rekordów/wartości w grupie jest niepoprawna (np. pusta)</li>
+                        <li>w przypadku sytuacji błędnych nie są generowane błędy wykonania&nbsp;</li>
+                        <li>w przypadku braku poprawnych wartości w grupie nadal emitowany jest logicznie spójny wynik</li>
+                    </ul>
+                    <p><strong>Uwaga!</strong> Nie ma konieczności sprawdzania wszystkich możliwych i niemożliwych wariantów problemów. Istotne jest jedynie czy jakakolwiek weryfikacja danych wejściowych i obsługa przypadków błędnych jest w sposób jawny wykonywana.&nbsp;</p>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Kryterium 14</td>
+            <td>1</td>
+            <td>1</td>
+            <td>
+                <div>
+                    <h5><strong>Kryterium 14</strong></h5>
+                    <p>Ocena&nbsp;programu&nbsp;<strong>MapReduce&nbsp;</strong>-&nbsp;<strong>Reducer - czytelność i jakość implementacji</strong></p>
+                    <p>Sprawdź czy:&nbsp;</p>
+                    <ul>
+                        <li>kod jest czytelny, dobrze sformatowany, logicznie podzielony (np. etap agregacji → emisja wyników),</li>
+                        <li>zmiennym i funkcjom nadano zrozumiałe nazwy,</li>
+                        <li>logika przetwarzania jest jasno i poprawnie udokumentowana komentarzami.</li>
+                    </ul>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Kryterium 15</td>
+            <td>1</td>
+            <td>1</td>
+            <td>
+                <div>
+                    <h5><strong>Kryterium 15</strong></h5>
+                    <p>Ocena&nbsp;programu&nbsp;<strong>MapReduce&nbsp;</strong>-&nbsp;<strong>Combiner - odczyt danych wejściowych</strong></p>
+                    <p>Sprawdź czy&nbsp;agregator łączący (<em>combiner</em>) poprawnie interpretuje strukturę danych wejściowych, zgodną z typem/formatem danych generowanym przez mappery.</p>
+                    <p>Upewnij się, że:&nbsp;</p>
+                    <ul>
+                        <li>właściwie uwzględniany jest format danych</li>
+                        <li>prawidłowo parsowane są wartości przekazywane z mappera, uwzględniając separatory, typy danych i kolejności pól</li>
+                        <li>w przypadku&nbsp;<em>MapReduce Classic</em>&nbsp;sprawdź deklaracje typów: w mapperze, reduktorze oraz konfiguracji zadania</li>
+                    </ul>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Kryterium 16</td>
+            <td>1</td>
+            <td>4</td>
+            <td>
+                <div>
+                    <h5><strong>Kryterium 16</strong></h5>
+                    <p>Ocena&nbsp;programu&nbsp;<strong>MapReduce&nbsp;</strong>-&nbsp;<strong>Combiner - poprawna agregacja</strong></p>
+                    <p>Sprawdź czy&nbsp;agregator łączący (combiner) dokonuje poprawnych agregacji, uwzględniając strukturę danych wejściowych oraz charakter obsługiwanej funkcji.</p>
+                    <p>Upewnij się, że:&nbsp;</p>
+                    <ul>
+                        <li>dla każdego klucza wykonywane są poprawne obliczenia zgodne z treścią zadania</li>
+                        <li>używane odpowiednich wzory/funkcje&nbsp;</li>
+                        <li>nie występują problemy z użyciem niepoprawnych typów danych</li>
+                        <li>w szczególności w przypadku funkcji niedystrybutywnych prawidłowo są łączone dane częściowe przekazane przez mappery/poprzednie iteracje combinerów.</li>
+                    </ul>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Kryterium 17</td>
+            <td>1</td>
+            <td>4</td>
+            <td>
+                <div>
+                    <h5><strong>Kryterium 17</strong></h5>
+                    <p>Ocena&nbsp;programu&nbsp;<strong>MapReduce&nbsp;</strong>-&nbsp;<strong>Combiner&nbsp;- oszczędność pamięciowa</strong></p>
+                    <p>Sprawdź czy agregator łączący (combiner) jest oszczędny pamięciowo</p>
+                    <p>Upewnij się, że:&nbsp;</p>
+                    <ul>
+                        <li>nie utrzymuje on w pamięci słowników, list ani innych struktur danych gromadzących rekordy z wielu grup/kluczy,</li>
+                        <li>przetwarza dane "strumieniowo": dla każdego klucza dokonuje agregacji, emituje wynik i przechodzi do następnej grupy/klucza</li>
+                    </ul>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Kryterium 18</td>
+            <td>1</td>
+            <td>4</td>
+            <td>
+                <div>
+                    <h5><strong>Kryterium 18</strong></h5>
+                    <p>Ocena&nbsp;programu&nbsp;<strong>MapReduce&nbsp;</strong>-&nbsp;<strong><strong>Combiner&nbsp;</strong>- format wyniku</strong></p>
+                    <p>Sprawdź czy agregator łączący (combiner) generuje dane o strukturze identycznej ze strukturą danych wejściowych</p>
+                    <p>Upewnij się, że:&nbsp;</p>
+                    <ul>
+                        <li>format klucza i wartości jest zgodny z tym, co produkują mappery,</li>
+                        <li>struktura danych wyjściowych pozwala na ich dalsze łączenie (kolejne iteracje combinerów lub reduktory)</li>
+                    </ul>
+                    Combiner nie zmienia semantyki danych – dokonuje tylko częściowej agregacji, nie może zmieniać formatu danych.
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Kryterium 19</td>
+            <td>1</td>
+            <td>1</td>
+            <td>
+                <div>
+                    <h5><strong>Kryterium 19</strong></h5>
+                    <p>Ocena&nbsp;programu&nbsp;<strong>MapReduce&nbsp;</strong>-&nbsp;<strong>Combiner&nbsp;- obsługa wyjątków i błędów</strong></p>
+                    <p>Sprawdź czy agregator łączący (combiner) jest odporny na błędne lub niepełne dane w grupie</p>
+                    <p>Upewnij się, że:&nbsp;</p>
+                    <ul>
+                        <li>poprawnie obsługiwane są przypadki, w których część rekordów/wartości w grupie jest niepoprawna (np. pusta)</li>
+                        <li>w przypadku sytuacji błędnych nie są generowane błędy wykonania&nbsp;</li>
+                        <li>w przypadku braku poprawnych wartości w grupie nadal emitowany jest logicznie spójny wynik</li>
+                    </ul>
+                    <p><strong>Uwaga!</strong>&nbsp;Nie ma konieczności sprawdzania wszystkich możliwych i niemożliwych wariantów problemów. Istotne jest jedynie czy jakakolwiek weryfikacja danych wejściowych i obsługa przypadków błędnych jest w sposób jawny wykonywana.&nbsp;</p>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Kryterium 20</td>
+            <td>1</td>
+            <td>1</td>
+            <td>
+                <div>
+                    <h5><strong>Kryterium 20</strong></h5>
+                    <p>Ocena&nbsp;programu&nbsp;<strong>MapReduce&nbsp;</strong>-&nbsp;<strong>Combiner&nbsp;- czytelność i jakość implementacji</strong></p>
+                    <p>Sprawdź czy:&nbsp;</p>
+                    <ul>
+                        <li>kod jest czytelny, dobrze sformatowany, logicznie podzielony (np. etap agregacji → emisja wyników),</li>
+                        <li>zmiennym i funkcjom nadano zrozumiałe nazwy,</li>
+                        <li>logika przetwarzania jest jasno i poprawnie udokumentowana komentarzami.</li>
+                    </ul>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Kryterium 21</td>
+            <td>1</td>
+            <td>1</td>
+            <td>
+                <div>
+                    <h5><strong>Kryterium 21</strong></h5>
+                    <p>Ocena&nbsp;programu&nbsp;<strong>MapReduce&nbsp;</strong>-&nbsp;<strong>skrypt uruchamiający - typ</strong></p>
+                    <p>Sprawdź czy polecenie uruchamiające jest zgodne z deklarowanym i zaimplementowanym wariantem <em>MapReduce </em>(<em>MapReduce Classic</em> lub <em>Hadoop Streaming</em>)</p>
+                    <p><strong>Uwaga!</strong> Przez skrypt rozumiemy zawartość dostarczonego w ramach projektu skryptu run_mr.sh. <br>W ramach tego i poniższych kryteriów dotyczących skryptu, nie oceniamy np. polecenia zawartego w definicji przepływu <em>Apache Airflow</em>&nbsp;chyba, że ocena dotyczy fragmentów identycznych zarówno w przepływie jak i w skrypcie (np. nie ma potrzeby uruchamiania skryptu jeśli jego poprawność lub wada została udowodniona identycznym poleceniem w przepływie). </p>
+                    <p><strong>Uwaga!</strong> W przypadku wariantu <em>MapReduce Classic </em>kryteria dotyczące "skryptu uruchamiającego" odnoszą się także do sposobu konfiguracji zadania <em>MapReduce </em>zawartego w metodzie run klasy głównej programu <em>MapReduce </em></p>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Kryterium 22</td>
+            <td>1</td>
+            <td>2</td>
+            <td>
+                <div>
+                    <h5><strong>Kryterium 22</strong></h5>
+                    <p>Ocena&nbsp;programu&nbsp;<strong>MapReduce&nbsp;</strong>-&nbsp;<strong>skrypt uruchamiający - obsługa parametrów</strong></p>
+                    <p>Sprawdź czy&nbsp;parametry wywołania skryptu dotyczące <strong>ścieżek dla danych źródłowych oraz wynikowych</strong> zostały poprawnie obsłużone&nbsp;</p>
+                    <p>W przypadku <em>MapReduce Classic</em>&nbsp;sprawdź czy konfiguracja zadania uwzględnia parametry dotyczące miejsca danych źródłowych i wynikowych</p>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Kryterium 23</td>
+            <td>1</td>
+            <td>2</td>
+            <td>
+                <div>
+                    <h5><strong>Kryterium 23</strong></h5>
+                    <p>Ocena&nbsp;programu&nbsp;<strong>MapReduce&nbsp;</strong>-&nbsp;<strong>skrypt uruchamiający - konfiguracja zadania</strong></p>
+                    <p>Sprawdź czy:</p>
+                    <ul>
+                        <li>w przypadku <em>Hadoop Streaming</em>: mapper, reducer i ewentualny combiner są poprawnie wskazane i dostarczone</li>
+                        <li>w przypadku <em>MapReduce Classic</em>: klasy mappera, reducera i combinera (jeśli został użyty ) są prawidłowo zadeklarowane, a konfiguracja <em>zadania</em>&nbsp;(<em>job</em>) spójna.</li>
+                    </ul>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Kryterium 24</td>
+            <td>2</td>
+            <td>6</td>
+            <td>
+                <div>
+                    <h5><strong>Kryterium 24</strong></h5>
+                    <p>Ocena&nbsp;programu&nbsp;<strong>MapReduce&nbsp;</strong>-&nbsp;<strong>skrypt uruchamiający - poprawność wyniku</strong></p>
+                    <p><strong>Uwaga! </strong>To kryterium wymaga znajomości poprawnego wyniku dla danych testowych.&nbsp;</p>
+                    <p><strong>Uwaga!</strong> To kryterium w rzeczywistości jest oceną całości przetwarzania MapReduce, a nie samego skryptu.</p>
+                    <p>Sprawdź czy wynik uzyskany w rezultacie użycia skryptu (lub jego odpowiednika w definicji przepływu):</p>
+                    <ul>
+                        <li>zawiera poprawne wartości obliczonych wybranych agregatów,</li>
+                        <li>zawiera wymaganą liczbę grup,</li>
+                        <li>zawiera strukturę&nbsp;zgodną ze specyfikacją projektu (kolejność pól, typy danych, separatory),&nbsp;</li>
+                        <li>jest logicznie spójny i kompletny, może być użyty w kolejnych etapach przetwarzania.</li>
+                    </ul>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Kryterium 25</td>
+            <td>1</td>
+            <td>1</td>
+            <td>
+                <div>
+                    <h5><strong>Kryterium 25</strong></h5>
+                    <p>Ocena&nbsp;programu&nbsp;<strong>MapReduce&nbsp;</strong>-&nbsp;<strong>skrypt uruchamiający - powtarzalność i ewentualna konieczność poprawy polecenia</strong></p>
+                    <p>Sprawdź czy:</p>
+                    <ul>
+                        <li>polecenia zawarte w skrypcie pozwalają na powtarzalne uruchomienie zadania <em>MapReduce</em>, w szczególności czy przed uruchomieniem zadania MapReduce usuwają istniejące ewentualnie miejsce docelowe</li>
+                        <li>ewentualne usunięcie nie istniejącego katalogu przeznaczonego na miejsce generowania wyniku nie powoduje błędu</li>
+                        <li>nie było konieczności poprawiania (w wyniku błędów popełnionych przez autora) poleceń zawartych w skrypcie zanim udało się go poprawnie uruchomić</li>
+                    </ul>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Kryterium 26</td>
+            <td>1</td>
+            <td>3</td>
+            <td>
+                <div>
+                    <h5><strong>Kryterium 26</strong></h5>
+                    <p>Ocena&nbsp;programu&nbsp;<strong>Hive&nbsp;</strong>- <strong>skrypt HQL</strong><strong>&nbsp;- wykonanie bez błędów</strong></p>
+                    <p>Sprawdź czy:</p>
+                    <ul>
+                        <li>skrypt zawierający polecenia HQL wykonuje bez błędów generowanych w wyniku użytych w skrypcie poleceń,&nbsp;</li>
+                        <li>podczas wykonywania skryptu nie są generowane krytyczne wyjątki np.&nbsp;z powodu brakujących tabel, kolumn, itp.&nbsp;</li>
+                    </ul>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Kryterium 27</td>
+            <td>1</td>
+            <td>2</td>
+            <td>
+                <div>
+                    <h5><strong>Kryterium 27</strong></h5>
+                    <p>Ocena&nbsp;programu&nbsp;<strong>Hive&nbsp;</strong>-&nbsp;<strong>skrypt HQL</strong><strong>&nbsp;- użycie parametrów</strong></p>
+                    <p>Sprawdź czy&nbsp;skrypt zawierający polecenia HQL korzysta z parametrów określających położenie danych źródłowych oraz miejsce generowania danych wynikowych</p>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Kryterium 28</td>
+            <td>2</td>
+            <td>2</td>
+            <td>
+                <div>
+                    <h5><strong>Kryterium 28</strong></h5>
+                    <p>Ocena&nbsp;programu&nbsp;<strong>Hive&nbsp;</strong>-&nbsp;<strong>skrypt HQL</strong><strong>&nbsp;- wykorzystanie danych źródłowych</strong></p>
+                    <p>Sprawdź czy&nbsp;skrypt zawierający polecenia HQL:&nbsp;</p>
+                    <ul>
+                        <li>poprawnie definiuje struktury umożliwiające sięgnięcie do danych źródłowych będących wynikiem działania MapReduce</li>
+                        <li>poprawnie definiuje struktury umożliwiające sięgnięcie do danych źródłowych ze zbioru datasource4</li>
+                        <li>powyższe struktury umożliwiają dalsze ich przetwarzanie</li>
+                    </ul>
+                    <p><strong>Uwaga!</strong> Po wykonaniu przepływu&nbsp;struktury definiujące powyższe dane źródłowe powinny być nadal dostępne. Może Ci to pomóc w ocenie tego kryterium.</p>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Kryterium 29</td>
+            <td>2</td>
+            <td>8</td>
+            <td>
+                <div>
+                    <h5><strong>Kryterium 29</strong></h5>
+                    <p>Ocena&nbsp;programu&nbsp;<strong>Hive&nbsp;</strong>-&nbsp;<strong>skrypt HQL</strong><strong>&nbsp;- poprawność obliczeń</strong></p>
+                    <p><strong>Uwaga! </strong>To kryterium wymaga znajomości poprawnego wyniku dla danych testowych.&nbsp;</p>
+                    <p>Sprawdź czy polecenia HQL zawarte w skrypcie:&nbsp;</p>
+                    <ul>
+                        <li>tworzą wyniki na poziomie agregacji zgodnym z wymaganiami projektu</li>
+                        <li>wyliczają wartości agregacji zgodnie z ich charakterem i typami wykorzystywanych funkcji&nbsp;</li>
+                        <li>tworzą wyniki, które są poprawne i spójne z oczekiwanym rezultatem
+                            <ul>
+                                <li>posiadają wszystkie wymagane w projekcie atrybuty/pola</li>
+                                <li>wartości wybranych miar/agregacji dla wybranych grup są zgodne z oczekiwanymi wynikami dla danych testowych&nbsp;</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <p><strong>Uwaga!</strong>&nbsp;To kryterium nie wymaga poprawności w zakresie formatu danych wynikowych (JSON)</p>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Kryterium 30</td>
+            <td>1</td>
+            <td>2</td>
+            <td>
+                <div>
+                    <h5><strong>Kryterium 30</strong></h5>
+                    <p>Ocena&nbsp;programu&nbsp;<strong>Hive&nbsp;</strong>-&nbsp;<strong>skrypt HQL</strong><strong>&nbsp;- format danych wynikowych</strong></p>
+                    <p>Sprawdź czy wynik zawiera rekordy w formacie JSON z atrybutami zgodnymi z projektem.</p>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Kryterium 31</td>
+            <td>1</td>
+            <td>1</td>
+            <td>
+                <div>
+                    <h5><strong>Kryterium 31</strong></h5>
+                    <p>Ocena&nbsp;programu&nbsp;<strong>Hive&nbsp;</strong>-&nbsp;<strong>skrypt HQL</strong><strong>&nbsp;- użycie SERDE</strong></p>
+                    <p>Sprawdź czy do generowania wyników wykorzystano mechanizm SERDE&nbsp;</p>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Kryterium 32</td>
+            <td>2</td>
+            <td>8</td>
+            <td>
+                <div>
+                    <h5><strong>Kryterium 32</strong></h5>
+                    <p>Ocena&nbsp;programu&nbsp;<strong>Hive&nbsp;</strong>-&nbsp;<strong>skrypt HQL</strong><strong>&nbsp;- wydajność</strong></p>
+                    <p>Sprawdź czy w trakcie uzyskiwania wyniku&nbsp;nie korzystano z niepotrzebnych fizycznych struktur pośrednich w tym:</p>
+                    <ul>
+                        <li>tabel (w tym tymczasowych) do przechowywania wyników pośrednich&nbsp;</li>
+                        <li>tabel, do których kopiowano dane źródłowe&nbsp;</li>
+                        <li>itp.</li>
+                    </ul>
+                    <p>Ponadto sprawdź czy&nbsp;w trakcie uzyskiwania wyniku nie odwoływano się do źródłowych danych wielokrotnie.</p>
+                    <p>Zakładamy, że:&nbsp;</p>
+                    <ul>
+                        <li>jednorazowe sięgnięcie do danych źródłowych i złożone przetwarzanie danych<br>jest wydajniejsze od&nbsp;</li>
+                        <li>uproszczonego przetwarzania danych i wielokrotnego sięgania do danych źródłowych </li>
+                    </ul>
+                    <br>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Kryterium 33</td>
+            <td>1</td>
+            <td>2</td>
+            <td>
+                <div>
+                    <h5><strong>Kryterium 33</strong></h5>
+                    <p>Ocena&nbsp;programu&nbsp;<strong>Hive&nbsp;</strong>-&nbsp;<strong>skrypt HQL</strong><strong>&nbsp;- powtarzalność uruchomienia</strong></p>
+                    <p>Sprawdź czy skrypt może bez przeszkód być uruchamiany wielokrotnie bez wpływu na generowany wynik</p>
+                    <p>W szczególności upewnij się, że&nbsp;skrypt </p>
+                    <ul>
+                        <li>nie usuwa danych źródłowych z ich oryginalnych miejsc</li>
+                        <li>usuwa wszelkie trwałe struktury lub definicje przed ich utworzeniem&nbsp;</li>
+                    </ul>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Kryterium 34</td>
+            <td>2</td>
+            <td>2</td>
+            <td>
+                <div>
+                    <h5><strong>Kryterium 34</strong></h5>
+                    <p>Ocena&nbsp;programu&nbsp;<strong>Hive&nbsp;</strong>-&nbsp;<strong>skrypt HQL</strong><strong>&nbsp;- debugowalność</strong></p>
+                    <p>Sprawdź czy skrypt pozostawia po swoim wykonaniu zarówno definicje/struktury dla:</p>
+                    <ul>
+                        <li>danych źródłowych (sprawdź także atrybuty dla danych źródłowych będących wynikiem programu MapReduce), jak i</li>
+                        <li>danych wynikowych&nbsp;</li>
+                    </ul>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Kryterium 35</td>
+            <td>1</td>
+            <td>2</td>
+            <td>
+                <div>
+                    <h5><strong>Kryterium 35</strong></h5>
+                    <p>Ocena&nbsp;programu&nbsp;<strong>Hive&nbsp;</strong>-&nbsp;<strong>skrypt uruchamiający - poprawność polecenia</strong></p>
+                    <p>Sprawdź czy polecenie uruchamiające jest składniowo poprawne i zawiera wszelkie wymagane parametry</p>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Kryterium 36</td>
+            <td>1</td>
+            <td>1</td>
+            <td>
+                <div>
+                    <h5><strong>Kryterium 36</strong></h5>
+                    <p>Ocena&nbsp;programu&nbsp;<strong>Hive&nbsp;</strong>-&nbsp;<strong>skrypt uruchamiający - obsługa parametrów</strong></p>
+                    <p>Sprawdź czy&nbsp;parametry wywołania skryptu dotyczące&nbsp;<strong>ścieżek dla danych źródłowych oraz wynikowych</strong>&nbsp;zostały poprawnie obsłużone i dostarczone do skryptu HQL w sposób zgodny z jego zawartością</p>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Kryterium 37</td>
+            <td>1</td>
+            <td>1</td>
+            <td>
+                <div>
+                    <h5><strong>Kryterium 37</strong></h5>
+                    <p>Ocena&nbsp;programu&nbsp;<strong>Hive&nbsp;</strong>-&nbsp;<strong>skrypt uruchamiający - użycie beeline</strong></p>
+                    <p>Sprawdź czy użyto w tym skrypcie programu beeline (lub innego "nowoczesnego" mechanizmu np. wywołania usługi REST) i w związku z tym nie wykorzystano&nbsp;<em>hive CLI</em>, co traktowane jest jako przestarzałe i co nie jest zalecane (0 pkt.)</p>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Kryterium 38</td>
+            <td>1</td>
+            <td>1</td>
+            <td>
+                <div>
+                    <h5><strong>Kryterium 38</strong></h5>
+                    <p>Ocena&nbsp;programu&nbsp;<strong>Hive&nbsp;</strong>-&nbsp;<strong>skrypt uruchamiający - brak konieczności poprawy</strong></p>
+                    <p>Sprawdź czy nie było konieczności poprawiania (w wyniku błędów popełnionych przez autora) poleceń zawartych w skrypcie zanim udało się go poprawnie uruchomić</p>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Kryterium 39</td>
+            <td>1</td>
+            <td>1</td>
+            <td>
+                <div>
+                    <h5><strong>Kryterium 39</strong></h5>
+                    <p>Ocena&nbsp;przepływu&nbsp;<strong><em>Apache Airflow</em></strong><strong>&nbsp;- parametry&nbsp;- wariant <em>MapReduce</em></strong></p>
+                    <p>Czy parametr określający wariant <em>MapReduce </em>miał wartość domyślną zgodną z deklaracją w opisie projektu?</p>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Kryterium 40</td>
+            <td>1</td>
+            <td>1</td>
+            <td>
+                <div>
+                    <h5><strong>Kryterium 40</strong></h5>
+                    <p>Ocena&nbsp;przepływu&nbsp;<strong><em>Apache Airflow</em></strong><strong>&nbsp;- polecenie MR - zgodność ze skryptem</strong></p>
+                    <p>Czy użyte w przepływie polecenie uruchamiające program <em>MapReduce&nbsp;</em>jest zgodne z dołączonym skryptem?</p>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Kryterium 41</td>
+            <td>1</td>
+            <td>1</td>
+            <td>
+                <div>
+                    <h5><strong>Kryterium 41</strong></h5>
+                    <p>Ocena&nbsp;przepływu&nbsp;<strong><em>Apache Airflow</em></strong><strong>&nbsp;- polecenie MR - parametry</strong></p>
+                    <p>Czy użyte w przepływie polecenie uruchamiające program <em>MapReduce </em>uwzględnia w sposób poprawny parametry przepływu określające miejsce dla danych źródłowych i wynikowych?</p>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Kryterium 42</td>
+            <td>1</td>
+            <td>1</td>
+            <td>
+                <div>
+                    <h5><strong>Kryterium 42</strong></h5>
+                    <p>Ocena&nbsp;przepływu&nbsp;<strong><em>Apache Airflow</em></strong><strong>&nbsp;- polecenie Hive - zgodność ze skryptem</strong></p>
+                    <p>Czy użyte w przepływie polecenie uruchamiające program Hive jest zgodne z dołączonym skryptem?</p>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Kryterium 43</td>
+            <td>1</td>
+            <td>1</td>
+            <td>
+                <div>
+                    <h5><strong>Kryterium 43</strong></h5>
+                    <p>Ocena&nbsp;przepływu&nbsp;<strong><em>Apache Airflow</em></strong><strong>&nbsp;- polecenie Hive - parametry</strong></p>
+                    <p>Czy użyte w przepływie polecenie uruchamiające program&nbsp;<em>Hive&nbsp;</em>uwzględnia w sposób poprawny parametry przepływu określające miejsce dla danych źródłowych i wynikowych?</p>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Kryterium 44</td>
+            <td>1</td>
+            <td>1</td>
+            <td>
+                <div>
+                    <h5><strong>Kryterium 44</strong></h5>
+                    <p>Ocena&nbsp;przepływu&nbsp;<strong><em>Apache Airflow</em></strong><strong>&nbsp;- zawartość - zmiany</strong></p>
+                    <p>Sprawdź czy przepływ</p>
+                    <ul>
+                        <li>we wszystkich pozostałych miejscach nie uległ zmianie, lub&nbsp;</li>
+                        <li>jeśli uległ zmianie, to zmiany te były niezbędne i w związku z tym uzasadnione&nbsp;</li>
+                    </ul>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Kryterium 45</td>
+            <td>1</td>
+            <td>1</td>
+            <td>
+                <div>
+                    <h5><strong>Kryterium 45</strong></h5>
+                    <p>Ocena&nbsp;przepływu&nbsp;<strong><em>Apache Airflow</em></strong><strong>&nbsp;- zawartość - powtarzalność</strong></p>
+                    <p>Sprawdź czy przepływ umożliwia jego wielokrotne uruchamianie - nie wprowadzono w nim zmian, które to blokują.&nbsp;</p>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Kryterium 46</td>
+            <td>1</td>
+            <td>1</td>
+            <td>
+                <div>
+                    <h5><strong>Kryterium 46</strong></h5>
+                    <p>Ocena&nbsp;przepływu&nbsp;<strong><em>Apache Airflow</em></strong><strong>&nbsp;- zawartość - wynik</strong></p>
+                    <p>Sprawdź czy przepływ w ramach ostatniej jednostki (tasku) prezentuje poprawnie wynik końcowy przetwarzania.&nbsp;</p>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>

@@ -1,0 +1,144 @@
+
+<style>
+  body { margin: 0; padding: 0; }
+  .wrap { padding: 1rem 0; font-size: 13px; }
+  h3 { font-size: 15px; font-weight: 500; margin: 0 0 4px; color: var(--color-text-primary); }
+  .subtitle { font-size: 12px; color: var(--color-text-secondary); margin: 0 0 16px; }
+
+  table { border-collapse: collapse; width: 100%; }
+  th, td { border: 0.5px solid var(--color-border-tertiary); padding: 5px 6px; text-align: center; white-space: nowrap; }
+  th { font-weight: 500; font-size: 12px; color: var(--color-text-secondary); background: var(--color-background-secondary); }
+
+  .col-proj { text-align: left; font-weight: 500; color: var(--color-text-primary); min-width: 42px; }
+  .col-name { text-align: left; color: var(--color-text-secondary); font-size: 11px; max-width: 130px; white-space: normal; line-height: 1.3; }
+
+  .cell-0 { background: transparent; color: var(--color-text-secondary); font-size: 11px; }
+  .cell-1 { background: #B5D4F4; color: #0C447C; font-weight: 500; font-size: 12px; }
+  .cell-1b { background: #AFA9EC; color: #3C3489; font-weight: 500; font-size: 12px; }
+
+  .score { font-weight: 500; font-size: 13px; min-width: 26px; }
+
+  .lvl { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 500; }
+  .lvl-1 { background: #D3D1C7; color: #444441; }
+  .lvl-2 { background: #B5D4F4; color: #0C447C; }
+  .lvl-3 { background: #9FE1CB; color: #085041; }
+  .lvl-4 { background: #FAC775; color: #633806; }
+  .lvl-5 { background: #F5C4B3; color: #712B13; }
+
+  .group-header { background: var(--color-background-secondary); font-weight: 500; color: var(--color-text-secondary); font-size: 11px; text-align: center; letter-spacing: 0.04em; }
+
+  .legend { margin-top: 16px; display: grid; grid-template-columns: 1fr 1fr; gap: 6px 24px; }
+  .leg-row { display: flex; gap: 6px; align-items: flex-start; font-size: 11px; color: var(--color-text-secondary); line-height: 1.4; }
+  .leg-key { font-weight: 500; color: var(--color-text-primary); min-width: 38px; flex-shrink: 0; }
+
+  .divider { border-top: 2px solid var(--color-border-secondary); }
+  .sep { background: var(--color-background-secondary); }
+</style>
+<div class="wrap">
+
+<table>
+<thead>
+  <tr>
+    <th class="col-proj" rowspan="2">#</th>
+    <th class="col-name" rowspan="2" style="text-align:left">Zestaw</th>
+    <th colspan="4" class="group-header" style="background:#E6F1FB;color:#185FA5">MapReduce</th>
+    <th colspan="5" class="group-header" style="background:#E1F5EE;color:#0F6E56">Hive</th>
+    <th rowspan="2" style="min-width:30px;font-weight:500">Σ</th>
+    <th rowspan="2" style="min-width:70px">Poziom</th>
+  </tr>
+  <tr>
+    <th title="Ekstrakcja daty (rok/miesiąc/godzina)" style="background:#EBF4FD;color:#185FA5">MR-A</th>
+    <th title="Złożona logika daty / wielokrotna emisja kluczy" style="background:#EBF4FD;color:#185FA5">MR-B</th>
+    <th title="Split/explode pola wielowartościowego w mapperze" style="background:#EBF4FD;color:#185FA5">MR-C</th>
+    <th title="Warunkowa/filtrowana agregacja" style="background:#EBF4FD;color:#185FA5">MR-D</th>
+    <th title="Proste rankowanie RANK() OVER PARTITION BY" style="background:#EBF5EF;color:#0F6E56">H-E</th>
+    <th title="Złożone okno: AVG OVER / odchylenie / flaga" style="background:#EBF5EF;color:#0F6E56">H-F</th>
+    <th title="LATERAL VIEW EXPLODE pola wielowartościowego" style="background:#EBF5EF;color:#0F6E56">H-G</th>
+    <th title="Zagnieżdżone struktury: ARRAY<STRUCT<>>" style="background:#EBF5EF;color:#0F6E56">H-H</th>
+    <th title="Filtr z okna LUB udział procentowy" style="background:#EBF5EF;color:#0F6E56">H-I</th>
+  </tr>
+</thead>
+<tbody id="tbl"></tbody>
+</table>
+
+<div class="legend">
+  <div class="leg-row"><span class="leg-key">MR-A</span> Ekstrakcja daty: rok, miesiąc, godzina lub data z pola datetime</div>
+  <div class="leg-row"><span class="leg-key">H-E</span> Proste rankowanie <code>RANK() OVER (PARTITION BY …)</code></div>
+  <div class="leg-row"><span class="leg-key">MR-B</span> Złożona logika daty (np. sezon) lub wielokrotna emisja kluczy z rekordu</div>
+  <div class="leg-row"><span class="leg-key">H-F</span> Złożone okno: avg cross-group, odchylenie, flaga powyżej średniej</div>
+  <div class="leg-row"><span class="leg-key">MR-C</span> Split/explode pola wielowartościowego już w mapperze</div>
+  <div class="leg-row"><span class="leg-key">H-G</span> <code>LATERAL VIEW EXPLODE()</code> pola wielowartościowego w Hive</div>
+  <div class="leg-row"><span class="leg-key">MR-D</span> Warunkowa agregacja (obliczenia tylko dla podzbioru rekordów)</div>
+  <div class="leg-row"><span class="leg-key">H-H</span> Zagnieżdżony output: <code>ARRAY&lt;STRUCT&lt;…&gt;&gt;</code> jako kolumna wynikowa</div>
+  <div class="leg-row"></div>
+  <div class="leg-row"><span class="leg-key">H-I</span> Filtrowanie wynikowe z okna LUB obliczenie udziału procentowego</div>
+</div>
+
+</div>
+<script>
+const projects = [
+  { id: 11, name: "flights-airports",    mr: [0,0,0,0], hive: [1,0,0,0,0], note: "" },
+  { id: 15, name: "food-orders",         mr: [0,0,0,0], hive: [1,0,0,0,0], note: "" },
+  { id: 12, name: "sales-products",      mr: [0,0,0,0], hive: [1,0,0,1,0], note: "" },
+  { id: 14, name: "bus-trips",           mr: [1,0,0,0], hive: [1,0,0,0,0], note: "" },
+  { id: 17, name: "hospitals-visits",    mr: [1,0,0,0], hive: [1,0,0,0,0], note: "" },
+  { id: 22, name: "shops-reviews",       mr: [1,0,0,0], hive: [0,0,1,0,0], note: "" },
+  { id: 16, name: "film-views",          mr: [0,0,0,0], hive: [0,1,0,0,1], note: "" },
+  { id: 19, name: "stations-weather",    mr: [1,0,0,0], hive: [0,1,0,0,0], note: "" },
+  { id: 18, name: "esports-heroes",      mr: [0,0,1,0], hive: [0,1,0,0,0], note: "" },
+  { id: 13, name: "football-matches",    mr: [0,1,0,0], hive: [1,0,0,1,0], note: "wielokrotna emisja kluczy" },
+  { id: 21, name: "parks-visits",        mr: [1,0,0,0], hive: [0,1,1,0,0], note: "" },
+  { id: 23, name: "car-rentals",         mr: [1,0,0,1], hive: [0,1,1,0,0], note: "" },
+  { id: 20, name: "library-borrowings",  mr: [1,0,0,1], hive: [0,1,1,0,1], note: "" },
+];
+
+function getLevel(s) {
+  if (s <= 1) return { txt: "1 – Podstawowy",  cls: "lvl-1" };
+  if (s <= 2) return { txt: "2 – Umiarkowany", cls: "lvl-2" };
+  if (s <= 3) return { txt: "3 – Zaawansowany",cls: "lvl-3" };
+  if (s <= 4) return { txt: "4 – Złożony",     cls: "lvl-4" };
+  return              { txt: "5 – Bardzo złożony", cls: "lvl-5" };
+}
+
+const mrHdr = ["MR-A","MR-B","MR-C","MR-D"];
+const hHdr  = ["H-E","H-F","H-G","H-H","H-I"];
+const mrCols = ["#B5D4F4","#B5D4F4","#B5D4F4","#B5D4F4"];
+const hCols  = ["#9FE1CB","#9FE1CB","#9FE1CB","#9FE1CB","#9FE1CB"];
+const mrTxt  = ["#185FA5","#185FA5","#185FA5","#185FA5"];
+const hTxt   = ["#085041","#085041","#085041","#085041","#085041"];
+
+const tbody = document.getElementById("tbl");
+let prevLevel = null;
+
+projects.forEach(p => {
+  const all = [...p.mr, ...p.hive];
+  const total = all.reduce((a,b) => a+b, 0);
+  const { txt, cls } = getLevel(total);
+
+  if (prevLevel !== cls) {
+    const sep = document.createElement("tr");
+    sep.innerHTML = `<td colspan="12" style="padding:2px;background:var(--color-background-secondary);border:none"></td>`;
+    tbody.appendChild(sep);
+    prevLevel = cls;
+  }
+
+  const tr = document.createElement("tr");
+  const noteHtml = p.note ? `<br><span style="font-size:10px;color:var(--color-text-secondary);font-style:italic">${p.note}</span>` : "";
+  let cells = `<td class="col-proj">${p.id}</td><td class="col-name">${p.name}${noteHtml}</td>`;
+
+  p.mr.forEach((v, i) => {
+    if (v) cells += `<td style="background:${mrCols[i]};color:${mrTxt[i]};font-weight:500;font-size:12px">✓</td>`;
+    else   cells += `<td class="cell-0">–</td>`;
+  });
+  p.hive.forEach((v, i) => {
+    if (v) cells += `<td style="background:${hCols[i]};color:${hTxt[i]};font-weight:500;font-size:12px">✓</td>`;
+    else   cells += `<td class="cell-0">–</td>`;
+  });
+
+  cells += `<td class="score" style="font-weight:600">${total}</td>`;
+  cells += `<td><span class="lvl ${cls}">${txt}</span></td>`;
+
+  tr.innerHTML = cells;
+  tbody.appendChild(tr);
+});
+</script>

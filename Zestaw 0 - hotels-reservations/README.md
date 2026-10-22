@@ -48,5 +48,12 @@ Wynik `(6)` powinien zawierać następujące atrybuty:
 
 ---
 
-Cyfry w nawiasach odnoszą się do cyfr wykorzystanych na graficznej reprezentacji projektu
-– patrz opis projektu na stronie kursu.
+## Uwagi
+
+* Rok rezerwacji wyznaczamy na podstawie `check_in`.
+* `cancelled_ratio` dotyczy wszystkich lat, a nie tylko roku 2024.
+* Wynik obejmuje hotele z co najmniej jedną rezerwacją rozpoczętą w 2024 roku.
+* Pozycja 1 w rankingu oznacza najwyższy iloraz. Równe wartości otrzymują tę samą pozycję,
+  a kolejna pozycja jest pomijana (np. 1, 2, 2, 4).
+* Cyfry w nawiasach odnoszą się do cyfr wykorzystanych na graficznej reprezentacji projektu - patrz opis projektu na stronie kursu.
+* Wyniki `(3)` i `(6)` mogą zawierać dodatkowe atrybuty, pod warunkiem że zawierają wszystkie atrybuty wymagane.

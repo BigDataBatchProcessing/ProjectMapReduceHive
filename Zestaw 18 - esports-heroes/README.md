@@ -58,5 +58,10 @@ Wynik `(6)` powinien zawierać następujące atrybuty:
 
 ---
 
-Cyfry w nawiasach odnoszą się do cyfr wykorzystowanych na graficznej reprezentacji projektu
-– patrz opis projektu na stronie kursu.
+## Uwagi
+
+* Średnią liczbę zwycięstw bohatera liczymy po regionach, w których bohater występuje.
+* Pozycja 1 w rankingu oznacza najwięcej zwycięstw. Równe wartości otrzymują tę samą pozycję,
+  a kolejna pozycja jest pomijana (np. 1, 2, 2, 4). Kolejność rekordów w tablicy nie ma znaczenia.
+* Wyniki `(3)` i `(6)` mogą zawierać dodatkowe atrybuty, pod warunkiem że zawierają wszystkie atrybuty wymagane.
+* Cyfry w nawiasach odnoszą się do cyfr wykorzystowanych na graficznej reprezentacji projektu – patrz opis projektu na stronie kursu.

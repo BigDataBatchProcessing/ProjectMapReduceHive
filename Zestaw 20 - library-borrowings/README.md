@@ -38,4 +38,10 @@ Wynik `(6)` powinien zawierać następujące atrybuty:
 
 ---
 
-Cyfry w nawiasach odnoszą się do cyfr wykorzystanych na graficznej reprezentacji projektu – patrz opis projektu na stronie kursu.  
+## Uwagi
+
+* Czas trwania wypożyczenia to liczba dni między `borrow_date` a `return_date`.
+* `avg_borrow_duration` w Hive to średnia po wszystkich zwróconych wypożyczeniach w grupie.
+* `genre_year_share` wyrażamy w procentach (0–100).
+* Wyniki `(3)` i `(6)` mogą zawierać dodatkowe atrybuty, pod warunkiem że zawierają wszystkie atrybuty wymagane.
+* Cyfry w nawiasach odnoszą się do cyfr wykorzystanych na graficznej reprezentacji projektu – patrz opis projektu na stronie kursu.  

@@ -52,5 +52,11 @@ Wynik `(6)` powinien zawierać następujące atrybuty:
 
 ---
 
-Cyfry w nawiasach odnoszą się do cyfr wykorzystanych na graficznej reprezentacji projektu
-– patrz opis projektu na stronie kursu.
+## Uwagi
+
+* `region_category_avg_rating` to średnia po wszystkich recenzjach sklepów w grupie.
+* `shop_count` obejmuje sklepy z co najmniej jedną recenzją.
+* Średnia oceny kategorii we wszystkich regionach to średnia z wartości
+  `region_category_avg_rating` tej kategorii.
+* Wyniki `(3)` i `(6)` mogą zawierać dodatkowe atrybuty, pod warunkiem że zawierają wszystkie atrybuty wymagane.
+* Cyfry w nawiasach odnoszą się do cyfr wykorzystanych na graficznej reprezentacji projektu – patrz opis projektu na stronie kursu.

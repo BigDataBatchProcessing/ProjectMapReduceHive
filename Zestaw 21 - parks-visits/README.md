@@ -39,4 +39,10 @@ Wynik `(6)` powinien zawierać następujące atrybuty:
 
 ---
 
-Cyfry w nawiasach odnoszą się do cyfr wykorzystanych na graficznej reprezentacji projektu – patrz opis projektu na stronie kursu.
+## Uwagi
+
+* Datę wizyty wyznaczamy na podstawie `entry_time`.
+* `avg_group_size` w Hive to średnia po wszystkich wizytach w grupie.
+* Średnią liczbę wizyt dla typu przyrody liczymy po regionach, w których ten typ występuje.
+* Wyniki `(3)` i `(6)` mogą zawierać dodatkowe atrybuty, pod warunkiem że zawierają wszystkie atrybuty wymagane.
+* Cyfry w nawiasach odnoszą się do cyfr wykorzystanych na graficznej reprezentacji projektu – patrz opis projektu na stronie kursu.

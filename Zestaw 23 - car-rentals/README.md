@@ -38,4 +38,11 @@ Wynik `(6)` powinien zawierać następujące atrybuty:
 
 ---
 
-Cyfry w nawiasach odnoszą się do cyfr wykorzystanych na graficznej reprezentacji projektu – patrz opis projektu na stronie kursu.
+## Uwagi
+
+* Rok wypożyczenia wyznaczamy na podstawie `rental_start`.
+* Średnie w grupie cecha + rok liczymy po samochodach mających co najmniej jedno wypożyczenie
+  w danym roku; `feature_year_avg_completed_ratio` jest średnią nieważoną.
+* Średnia dla cechy we wszystkich latach to średnia z wartości `feature_year_avg_rentals` tej cechy.
+* Wyniki `(3)` i `(6)` mogą zawierać dodatkowe atrybuty, pod warunkiem że zawierają wszystkie atrybuty wymagane.
+* Cyfry w nawiasach odnoszą się do cyfr wykorzystanych na graficznej reprezentacji projektu – patrz opis projektu na stronie kursu.

@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kryteria oceny – Projekt 1 v3</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap');
+
+  :root {
+    --bg:        #f4f3ef;
+    --surface:   #ffffff;
+    --border:    #dedad2;
+    --border2:   #eceae4;
+    --text:      #191817;
+    --muted:     #6b6760;
+    --faint:     #9e9a94;
+
+    --mr:        #1a4f8b;
+    --mr-light:  #e8f0fb;
+    --mr-mid:    #c4d8f4;
+
+    --hv:        #1a6b3e;
+    --hv-light:  #e6f5ee;
+    --hv-mid:    #b8dfc8;
+
+    --wf:        #7a4500;
+    --wf-light:  #fdf3e5;
+    --wf-mid:    #f0ccaa;
+
+    --gate-bg:   #fff0e0;
+    --gate-bd:   #cc6600;
+    --gate-text: #7a3300;
+
+    --alpha-bg:  #f0ebff;
+    --alpha-bd:  #9a7fd4;
+    --alpha-text:#4a2a8b;
+    --beta-bg:   #fff5e0;
+    --beta-bd:   #d4a827;
+    --beta-text: #6b4a00;
+
+    --perf-bg:   #fef8e0;
+    --perf-bd:   #d4c827;
+    --perf-text: #5a4400;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 13.5px;
+    background: var(--bg);
+    color: var(--text);
+    padding: 32px 20px 60px;
+    line-height: 1.65;
+  }
+
+  .page-top { max-width: 980px; margin: 0 auto 28px; }
+  .page-top h1 {
+    font-size: 20px; font-weight: 700;
+    border-left: 4px solid var(--mr); padding-left: 12px;
+    margin-bottom: 4px;
+  }
+  .page-top p { color: var(--muted); font-size: 12.5px; padding-left: 16px; }
+
+  .totals {
+    max-width: 980px; margin: 0 auto 24px;
+    display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 10px;
+  }
+  .tc {
+    background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: 7px; padding: 12px 16px; text-align: center;
+  }
+  .tc .n { font-family: 'IBM Plex Mono', monospace; font-size: 32px; font-weight: 700; line-height: 1; margin-bottom: 3px; }
+  .tc .l { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; }
+  .tc.all { border-color: var(--mr); } .tc.all .n { color: var(--mr); }
+  .tc.mr  .n { color: var(--mr); }
+  .tc.hv  .n { color: var(--hv); }
+  .tc.wf  .n { color: var(--wf); }
+
+  .legend {
+    max-width: 980px; margin: 0 auto 24px;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 7px; padding: 12px 16px;
+    display: flex; flex-wrap: wrap; gap: 8px 24px; font-size: 12px; color: var(--muted);
+  }
+  .li { display: flex; align-items: center; gap: 6px; }
+
+  .badge {
+    display: inline-flex; align-items: center; justify-content: center;
+    font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; font-weight: 700;
+    border-radius: 4px; padding: 1px 6px; white-space: nowrap;
+  }
+  .badge.yes { background: #e6f5ee; color: #1a6b3e; border: 1px solid #b8dfc8; }
+  .badge.no  { background: #fceaea; color: #8b1a1a; border: 1px solid #f0b8b8; }
+  .badge.na  { background: #fffbe6; color: #4a4500; border: 1px solid #e6d860; }
+  .badge.w   { background: #f0f0f0; color: var(--text); border: 1px solid var(--border); }
+
+  /* Section */
+  .section { max-width: 980px; margin: 0 auto 36px; }
+
+  .sec-head {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 16px; border-radius: 7px 7px 0 0;
+    border: 1.5px solid; border-bottom: none;
+  }
+  .sec-head.mr { background: var(--mr-light); border-color: var(--mr); color: var(--mr); }
+  .sec-head.hv { background: var(--hv-light); border-color: var(--hv); color: var(--hv); }
+  .sec-head.wf { background: var(--wf-light); border-color: var(--wf); color: var(--wf); }
+  .sec-head h2 { font-size: 15px; font-weight: 700; flex: 1; }
+  .sec-head .spts {
+    font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 700;
+    background: rgba(255,255,255,.7); padding: 2px 10px; border-radius: 10px;
+  }
+
+  /* Gate banner */
+  .gate-banner {
+    background: var(--gate-bg); border: 1.5px solid var(--gate-bd);
+    border-radius: 0; padding: 10px 16px;
+    display: flex; align-items: flex-start; gap: 12px;
+    border-bottom: none;
+  }
+  .gate-icon {
+    font-size: 20px; line-height: 1; flex-shrink: 0; margin-top: 1px;
+  }
+  .gate-text { flex: 1; }
+  .gate-text strong { color: var(--gate-text); font-size: 13px; display: block; margin-bottom: 2px; }
+  .gate-text span { color: var(--gate-text); font-size: 12px; }
+  .gate-conditions {
+    margin-top: 6px; padding-left: 14px; font-size: 12px; color: var(--gate-text);
+  }
+  .gate-conditions li { margin-bottom: 2px; }
+
+  /* Performance stripe */
+  .perf-stripe {
+    background: var(--perf-bg); border-left: 3px solid var(--perf-bd);
+  }
+
+  /* Table */
+  .ct {
+    width: 100%; border-collapse: collapse;
+    background: var(--surface); border: 1.5px solid;
+    border-radius: 0 0 7px 7px; overflow: hidden;
+  }
+  .ct.mr { border-color: var(--mr); }
+  .ct.hv { border-color: var(--hv); }
+  .ct.wf { border-color: var(--wf); }
+
+  .ct thead tr { background: var(--bg); }
+  .ct thead th {
+    font-size: 10.5px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: .06em; color: var(--muted);
+    padding: 8px 11px; border-bottom: 1.5px solid var(--border); text-align: left;
+    white-space: nowrap;
+  }
+
+  .ct tbody tr { border-bottom: 1px solid var(--border2); }
+  .ct tbody tr:last-child { border-bottom: none; }
+  .ct tbody tr.perf-stripe td { background: var(--perf-bg); }
+
+  /* Group row */
+  .gr td {
+    background: var(--bg); font-size: 11px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: .07em; color: var(--muted);
+    padding: 5px 11px;
+    border-top: 1.5px solid var(--border); border-bottom: 1px solid var(--border);
+  }
+
+  /* Alpha/Beta group rows */
+  .gr-alpha td { background: var(--alpha-bg) !important; color: var(--alpha-text) !important; border-color: var(--alpha-bd) !important; }
+  .gr-beta  td { background: var(--beta-bg)  !important; color: var(--beta-text)  !important; border-color: var(--beta-bd)  !important; }
+  .gr-perf  td { background: var(--perf-bg)  !important; color: var(--perf-text)  !important; border-color: var(--perf-bd)  !important; }
+
+  .ct td { padding: 9px 11px; vertical-align: top; font-size: 13px; }
+
+  .cc  { font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 700; color: var(--muted); width: 42px; white-space: nowrap; }
+  .cw  { text-align: center; width: 42px; }
+  .wt  {
+    display: inline-flex; align-items: center; justify-content: center;
+    font-family: 'IBM Plex Mono', monospace; font-size: 15px; font-weight: 700;
+    width: 30px; height: 30px; border-radius: 50%;
+    border: 1.5px solid var(--border); color: var(--text); background: var(--bg);
+  }
+  .wt.w2 { background: #e8f0fb; border-color: var(--mr-mid); color: var(--mr); }
+  .wt.w2h{ background: #e6f5ee; border-color: var(--hv-mid); color: var(--hv); }
+
+  .ct-title { width: 33%; font-weight: 600; }
+  .cy { width: 27%; vertical-align: top; }
+  .cn { width: 23%; vertical-align: top; }
+  .cna{ width: 12%; vertical-align: top; }
+
+  .vh { display: block; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; margin-bottom: 3px; }
+  .vh.y { color: #1a6b3e; } .vh.n { color: #8b1a1a; } .vh.a { color: #4a4500; }
+
+  .dl { margin: 0; padding-left: 14px; font-size: 12.5px; color: var(--muted); }
+  .dl li { margin-bottom: 2px; }
+
+  .ctag {
+    display: inline-block; font-size: 10px; font-weight: 600;
+    background: #fffbe6; color: #4a4500; border: 1px solid #e6d860;
+    border-radius: 3px; padding: 1px 5px; margin-left: 4px; vertical-align: middle; white-space: nowrap;
+  }
+  .ptag {
+    display: inline-block; font-size: 10px; font-weight: 600;
+    background: var(--perf-bg); color: var(--perf-text); border: 1px solid var(--perf-bd);
+    border-radius: 3px; padding: 1px 5px; margin-left: 4px; vertical-align: middle; white-space: nowrap;
+  }
+  .na-txt { font-size: 12px; color: #4a4500; font-style: italic; line-height: 1.4; }
+
+  .grp-note {
+    margin-top: 5px; padding: 5px 8px; border-radius: 4px; font-size: 11.5px; line-height: 1.4;
+  }
+  .grp-note.alpha { background: var(--alpha-bg); color: var(--alpha-text); border: 1px solid var(--alpha-bd); }
+  .grp-note.beta  { background: var(--beta-bg);  color: var(--beta-text);  border: 1px solid var(--beta-bd); }
+
+  .grand {
+    max-width: 980px; margin: 0 auto;
+    background: var(--text); border-radius: 7px;
+    padding: 14px 20px; display: flex; justify-content: space-between; align-items: center; color: #fff;
+  }
+  .grand .label { font-size: 13px; font-weight: 600; opacity: .8; }
+  .grand .val { font-family: 'IBM Plex Mono', monospace; font-size: 24px; font-weight: 700; }
+
+  code { font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; background: var(--bg); padding: 0 3px; border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<div class="page-top">
+  <h1>Kryteria oceny szczegółowej – Projekt 1</h1>
+  <p>MapReduce / Apache Hive / Apache Airflow &nbsp;·&nbsp; Skala 0–50 pkt</p>
+</div>
+
+<div class="totals">
+  <div class="tc all"><div class="n">50</div><div class="l">Łącznie</div></div>
+  <div class="tc mr"> <div class="n">20</div><div class="l">MapReduce</div></div>
+  <div class="tc hv"> <div class="n">20</div><div class="l">Apache Hive</div></div>
+  <div class="tc wf"> <div class="n">10</div><div class="l">Airflow</div></div>
+</div>
+
+<div class="legend">
+  <strong style="color:var(--text);font-size:12px">Legenda:</strong>
+  <div class="li"><span class="badge yes">TAK</span> Spełnione → punkty przyznane</div>
+  <div class="li"><span class="badge no">NIE</span> Niespełnione → 0 pkt</div>
+  <div class="li"><span class="badge na">N/D</span> Nie dotyczy Twojego zestawu → punkty przyznane automatycznie</div>
+  <div class="li"><span class="badge w">W</span> Waga = liczba punktów za kryterium</div>
+  <div class="li" style="color:var(--text)">Każde kryterium jest <strong>binarne</strong>. Suma maks. = 50 pkt dla każdego zestawu.</div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════
+     I. MAPREDUCED
+══════════════════════════════════════════════════ -->
+<div class="section">
+  <div class="sec-head mr">
+    <h2>I. Program MapReduce</h2>
+    <span class="spts">20 pkt</span>
+  </div>
+
+  <!-- GATE -->
+  <div class="gate-banner">
+    <div class="gate-icon">⛔</div>
+    <div class="gate-text">
+      <strong>WARUNEK KONIECZNY – Zgodność wariantu implementacji, realna implementacja (nie punktowane)</strong>
+      <span>Zanim ocenisz poniższe kryteria, zweryfikuj zgodność wariantu. Jeśli warunek nie jest spełniony, <u>całą sekcję MapReduce oceniasz na 0 pkt</u>.</span>
+      <ul class="gate-conditions">
+        <li>Zadeklarowany wariant (Classic lub Hadoop Streaming) musi być zgodny z faktycznie dostarczonymi plikami.</li>
+        <li>Classic: obecny plik JAR; skrypt używa <code>hadoop jar …</code></li>
+        <li>Streaming: obecne pliki mapper.py / reducer.py; skrypt używa <code>mapred streaming …</code></li>
+		<li>Implementacja zawiera realne rozwiązanie zgodne Twoim zestawem (a nie przykładowy lub losowy) zestaw plików 
+		nie mających wiele wspólnego z poprawnym rozwiązaniem dla Twojego zestawu.</li>
+		<li>Implementacja nie zawiera fundamentalnych i oczywistych błędów uniemożliwiających jej użycie (także po dostosowaniu) czy nawet adekwatną ocenę.</li>
+      </ul>
+    </div>
+  </div>
+
+  <table class="ct mr">
+    <thead>
+      <tr>
+        <th style="width:42px">#</th>
+        <th style="width:42px; text-align:center">W</th>
+        <th>Kryterium</th>
+        <th><span class="badge yes">TAK</span> – warunki spełnienia</th>
+        <th><span class="badge no">NIE</span> – przykłady niespełnienia</th>
+        <th style="width:11%"><span class="badge na">N/D</span></th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <tr class="gr"><td colspan="6">I.A &nbsp;Mapper – poprawność</td></tr>
+
+      <tr>
+        <td class="cc">M02</td>
+        <td class="cw"><div class="wt w2">2</div></td>
+        <td class="ct-title">Mapper prawidłowo parsuje dane wejściowe</td>
+        <td class="cy">
+          <span class="vh y">TAK gdy:</span>
+          <ul class="dl">
+            <li>Rekordy dzielone właściwym separatorem (np. przecinek w CSV).</li>
+            <li>Wymagane pola odczytywane z właściwych pozycji; konwersja typów tam gdzie konieczna (liczby, daty w formacie zestawu).</li>
+            <li>Wiersz nagłówkowy CSV (jeśli istnieje) jest pomijany.</li>
+          </ul>
+        </td>
+        <td class="cn">
+          <span class="vh n">NIE gdy:</span>
+          <ul class="dl">
+            <li>Błędny separator, złe indeksy lub brak konwersji powodujący błędy obliczeń.</li>
+            <li>Nagłówek trafia do obliczeń jako rekord.</li>
+          </ul>
+        </td>
+        <td class="cna">–</td>
+      </tr>
+
+      <tr>
+        <td class="cc">M03</td>
+        <td class="cw"><div class="wt w2">2</div></td>
+        <td class="ct-title">Klucz pośredni (grupowania) jest kompletny i zgodny z wymaganiami zestawu</td>
+        <td class="cy">
+          <span class="vh y">TAK gdy:</span>
+          <ul class="dl">
+            <li>Klucz zawiera wszystkie pola wymagane do grupowania (np. <code>hotel_id + year</code>).</li>
+            <li>W Streaming: separator spójny z konfiguracją zadania; zakres klucza właściwie zdefiniowany.</li>
+          </ul>
+        </td>
+        <td class="cn">
+          <span class="vh n">NIE gdy:</span>
+          <ul class="dl">
+            <li>Brakuje wymaganego pola grupowania.</li>
+            <li>Separator powoduje błędne grupowanie (klucz obejmuje część wartości).</li>
+          </ul>
+        </td>
+        <td class="cna">–</td>
+      </tr>
+
+      <tr>
+        <td class="cc">M04</td>
+        <td class="cw"><div class="wt w2">2</div></td>
+        <td class="ct-title">Mapper emituje wszystkie wartości niezbędne do obliczeń i umożliwia agregację wielopoziomową</td>
+        <td class="cy">
+          <span class="vh y">TAK gdy:</span>
+          <ul class="dl">
+            <li>Wartość emitowana zawiera dane do obliczenia każdej z wymaganych miar (zdefiniowanych jawnie w opisie projektu oraz tych, które wymagane są np. dodatkowo przez obliczenia w Hive).</li>
+            <li>Dla miar niedystrybutywnych (np. średnia): mapper emituje <strong>wszystkie składowe</strong> (np. sumę i liczność osobno), nie np. pojedynczą wartość – dzięki czemu możliwa jest późniejsza wielopoziomowa agregacja (combiner).</li>
+          </ul>
+        </td>
+        <td class="cn">
+          <span class="vh n">NIE gdy:</span>
+          <ul class="dl">
+            <li>Brakuje kluczowego pola (np. tylko cena uniemożliwiająca poprawne obliczenie średniej).</li>
+            <li>Mapper emituje gotową średnią – combiner nie mógłby działać poprawnie.</li>
+          </ul>
+        </td>
+        <td class="cna">–</td>
+      </tr>
+
+      <tr>
+        <td class="cc">M05</td>
+        <td class="cw"><div class="wt w2">2</div></td>
+        <td class="ct-title">
+          Mapper poprawnie obsługuje wymaganą operację złożoną
+          <span class="ctag">N/D jeśli nie dotyczy</span>
+        </td>
+        <td class="cy">
+          <span class="vh y">TAK gdy:</span>
+          <ul class="dl">
+            <li><em>Złożona logika daty (np. sezon, kwartał):</em> progi dat poprawne, wynik zgodny z definicją w opisie zestawu.</li>
+            <li><em>Wielokrotna emisja kluczy z jednego rekordu źródłowego</em>, np. mapper emituje wiele par dla każdego wymaganego klucza.</li>
+            <li><em>Rozbicie pola wielowartościowego</em> (np. lista bohaterów oddzielona <code>;</code>): mapper poprawnie dzieli i emituje osobny rekord dla każdego elementu.</li>
+            <li><em>Agregacja warunkowa</em> (np. zliczamy tylko rekordy o określonym statusie): warunek zaimplementowany, rekordy wykluczone są pomijane.</li>
+          </ul>
+        </td>
+        <td class="cn">
+          <span class="vh n">NIE gdy:</span>
+          <ul class="dl">
+            <li>Błąd w logice daty / błędne progi sezonu.</li>
+            <li>Brak emisji dla jednego z wymaganych kluczy.</li>
+            <li>Brak podziału pola wielowartościowego.</li>
+            <li>Błędny lub brakujący warunek filtrowania.</li>
+          </ul>
+        </td>
+        <td class="cna"><span class="na-txt">Zestaw bez żadnej operacji złożonej w mapperze → punkty automatycznie.</span></td>
+      </tr>
+
+      <tr class="gr-perf"><td colspan="6">I.B &nbsp;Mapper – wydajność i odporność <span class="ptag">⚡ wydajność</span></td></tr>
+
+      <tr class="perf-stripe">
+        <td class="cc">M06</td>
+        <td class="cw"><div class="wt w2">2</div></td>
+        <td class="ct-title">Mapper przetwarza rekordy strumieniowo i obsługuje błędne dane <span class="ptag">⚡</span></td>
+        <td class="cy">
+          <span class="vh y">TAK gdy:</span>
+          <ul class="dl">
+            <li>Dla każdego rekordu mapper przetwarza i emituje wynik niezwłocznie – <strong>brak słowników, list ani innych struktur akumulujących dane z wielu rekordów</strong> przed emisją.</li>
+            <li>Mapper nie emituje danych błędnych ani nadmiarowych (brak danych niewychodzących ze źródłowego rekordu).</li>
+            <li>Istnieje jawna weryfikacja danych wejściowych (np. sprawdzenie liczby pól, obsługa wyjątku konwersji) – błędne rekordy są pomijane bez przerwania działania mappera.</li>
+          </ul>
+        </td>
+        <td class="cn">
+          <span class="vh n">NIE gdy:</span>
+          <ul class="dl">
+            <li>Mapper wczytuje rekordy do słownika/listy przed emisją – naruszenie wzorca strumieniowego.</li>
+            <li>Brak jakiejkolwiek weryfikacji – błędny rekord powoduje wyjątek i awarię zadania.</li>
+            <li>Mapper emituje dane niezwiązane z bieżącym rekordem.</li>
+          </ul>
+        </td>
+        <td class="cna">–</td>
+      </tr>
+
+      <tr class="gr"><td colspan="6">I.C &nbsp;Combiner (agregator łączący)</td></tr>
+
+      <tr>
+        <td class="cc">M07</td>
+        <td class="cw"><div class="wt">1</div></td>
+        <td class="ct-title">Combiner jest zaimplementowany</td>
+        <td class="cy">
+          <span class="vh y">TAK gdy:</span>
+          <ul class="dl">
+            <li>Streaming: projekt zawiera osobny plik Combiner, ewentualnie Combiner opiera się na pliku Reduktora; Combiner jest wskazany w skrypcie uruchamiającym (flaga <code>-combiner</code>)</li>
+            <li>Classic: klasa Combinera jest zdefiniowana lub opiera się na klasie Reduktora; Combiner jest skonfigurowany w zadaniu.</li>
+          </ul>
+        </td>
+        <td class="cn">
+          <span class="vh n">NIE gdy:</span>
+          <ul class="dl">
+            <li>Brak Combinera lub brak jego konfiguracji w zadaniu – cała agregacja pośrednia odbywa się wyłącznie w reducerze.</li>
+          </ul>
+        </td>
+        <td class="cna">–</td>
+      </tr>
+
+      <tr>
+        <td class="cc">M08</td>
+        <td class="cw"><div class="wt w2">2</div></td>
+        <td class="ct-title">Combiner poprawnie agreguje dane i zachowuje format identyczny z mapperem</td>
+        <td class="cy">
+          <span class="vh y">TAK gdy:</span>
+          <ul class="dl">
+            <li>Combiner dokonuje częściowej agregacji poprawnie – dla funkcji dystrybutywnych (np. COUNT, SUM, MAX, MIN) analogicznie jak w przypadku Reduktora; dla niedystrybutywnych (np. AVG) łączy składowe (suma + liczność) a nie wylicza gotowych wartości.</li>
+			<li>Combiner korzysta z funkcji, które komutatywne i łączne</li>
+            <li><strong>Format wyjściowy combinera jest identyczny z formatem wyjściowym mappera</strong> (te same klucze, te same separatory, te same pola wartości) – tak aby combiner mógł być stosowany iteracyjnie.</li>
+            <li>Combiner przetwarza dane strumieniowo – brak akumulacji wielu kluczy w pamięci.</li>
+          </ul>
+        </td>
+        <td class="cn">
+          <span class="vh n">NIE gdy:</span>
+          <ul class="dl">
+            <li>Combiner dokonuje niepoprawnej agregacji np. wylicza cząstkowe średnie zamiast łączyć sumy i liczności.</li>
+            <li>Format wyjściowy combinera różni się od wyjścia mappera – reducer nie mógłby przetwarzać wyników combinera i mappera jednakowo, Combiner nie mógłby działać iteracyjnie na swoich wynikach.</li>
+            <li>Combiner gromadzi dane z wielu kluczy w pamięci.</li>
+          </ul>
+        </td>
+        <td class="cna">–</td>
+      </tr>
+
+      <tr class="gr"><td colspan="6">I.D &nbsp;Reducer</td></tr>
+
+      <tr>
+        <td class="cc">M09</td>
+        <td class="cw"><div class="wt">1</div></td>
+        <td class="ct-title">Reducer poprawnie odczytuje format danych z poprzedniego etapu</td>
+        <td class="cy">
+          <span class="vh y">TAK gdy:</span>
+          <ul class="dl">
+            <li>Separator, kolejność i typy pól w reducerze są spójne z wyjściem mappera / combinera.</li>
+            <li>W Classic: deklaracje typów w mapperze, reducerze i konfiguracji zadania są wzajemnie zgodne.</li>
+          </ul>
+        </td>
+        <td class="cn">
+          <span class="vh n">NIE gdy:</span>
+          <ul class="dl">
+            <li>Inny separator niż mapper lub błędna kolejność pól.</li>
+          </ul>
+        </td>
+        <td class="cna">–</td>
+      </tr>
+
+      <tr>
+        <td class="cc">M10</td>
+        <td class="cw"><div class="wt w2">2</div></td>
+        <td class="ct-title">Reducer oblicza poprawnie wszystkie wymagane miary</td>
+        <td class="cy">
+          <span class="vh y">TAK gdy:</span>
+          <ul class="dl">
+            <li>Każda miara (liczność, suma, średnia, liczba warunkowa) obliczona poprawnym wzorem.</li>
+            <li>Dla miar niedystrybutywnych: reducer łączy składowe (suma ÷ liczność), nie oblicza cząstkowych wartości i np. dopiero na końcu wylicza ostateczny wynik.</li>
+          </ul>
+        </td>
+        <td class="cn">
+          <span class="vh n">NIE gdy:</span>
+          <ul class="dl">
+            <li>Błędny wzór, pominięta miara lub błąd przy łączeniu danych z combinera.</li>
+          </ul>
+        </td>
+        <td class="cna">–</td>
+      </tr>
+
+      <tr class="perf-stripe">
+        <td class="cc">M11</td>
+        <td class="cw"><div class="wt w2">2</div></td>
+        <td class="ct-title">Format wyniku reducera zgodny ze specyfikacją; przetwarzanie strumieniowe <span class="ptag">⚡</span></td>
+        <td class="cy">
+          <span class="vh y">TAK gdy:</span>
+          <ul class="dl">
+            <li>Wynik zawiera komplet wartości zgodny ze specyfikacją zestawu.</li>
+            <li>Brak elementów zbędnych uniemożliwiających parsowanie (nagłówki, komunikaty diagnostyczne w strumieniu).</li>
+            <li>Reducer emituje wynik dla bieżącego klucza i przechodzi do następnego – <strong>brak akumulacji rekordów z wielu kluczy w pamięci</strong>.</li>
+          </ul>
+        </td>
+        <td class="cn">
+          <span class="vh n">NIE gdy:</span>
+          <ul class="dl">
+            <li>Brakuje wymaganych atrybutów lub ich format uniemożliwia załadowanie do tabeli Hive.</li>
+            <li>Reducer gromadzi wszystkie rekordy wszystkich kluczy w jednej strukturze.</li>
+          </ul>
+        </td>
+        <td class="cna">–</td>
+      </tr>
+
+      <tr class="gr"><td colspan="6">I.E &nbsp;Skrypt uruchamiający i wynik końcowy</td></tr>
+
+      <tr>
+        <td class="cc">M12</td>
+        <td class="cw"><div class="wt">1</div></td>
+        <td class="ct-title">Skrypt run_mr.sh poprawnie konfiguruje zadanie i obsługuje parametry ścieżek</td>
+        <td class="cy">
+          <span class="vh y">TAK gdy:</span>
+          <ul class="dl">
+            <li>Skrypt akceptuje i przekazuje parametry <code>input_dir1</code> i <code>output_dir3</code>.</li>
+            <li>Streaming: mapper, reducer i combiner (jeśli istnieje) (oraz inne wymagane pliki) wskazane i dostarczone (<code>-files</code>).</li>
+            <li>Classic: klasy mappera, reducera, combinera i konfiguracja zadania (job) spójne z implementacją.</li>
+          </ul>
+        </td>
+        <td class="cn">
+          <span class="vh n">NIE gdy:</span>
+          <ul class="dl">
+            <li>Ścieżki wpisane na stałe; brak pliku w <code>-files</code>; błędna konfiguracja klas.</li>
+          </ul>
+        </td>
+        <td class="cna">–</td>
+      </tr>
+
+      <tr>
+        <td class="cc">M13</td>
+        <td class="cw"><div class="wt">1</div></td>
+        <td class="ct-title">Skrypt jest powtarzalny i nie wymagał poprawek przed uruchomieniem</td>
+        <td class="cy">
+          <span class="vh y">TAK gdy:</span>
+          <ul class="dl">
+            <li>Przed uruchomieniem zadania skrypt usuwa katalog wynikowy w HDFS (a także obsługuje jego brak bez błędu).</li>
+            <li>Drugie uruchomienie bez ręcznych ingerencji kończy się sukcesem.</li>
+            <li>Skrypt nie wymagał poprawek (w wyniku błędów autora) przed pierwszym poprawnym uruchomieniem.</li>
+          </ul>
+        </td>
+        <td class="cn">
+          <span class="vh n">NIE gdy:</span>
+          <ul class="dl">
+            <li>Brak usuwania katalogu wynikowego – drugie uruchomienie kończy się błędem.</li>
+            <li>Konieczna była ręczna edycja skryptu w celu naprawy błędów autora.</li>
+          </ul>
+        </td>
+        <td class="cna">–</td>
+      </tr>
+
+    </tbody>
+  </table>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════
+     II. HIVE
+══════════════════════════════════════════════════ -->
+<div class="section">
+  <div class="sec-head hv">
+    <h2>II. Program Apache Hive</h2>
+    <span class="spts">20 pkt</span>
+  </div>
+  
+  <!-- GATE -->
+  <div class="gate-banner">
+    <div class="gate-icon">⛔</div>
+    <div class="gate-text">
+      <strong>WARUNEK KONIECZNY – Zgodność zestawu implementacji, realna implementacja (nie punktowane)</strong>
+      <span>Zanim ocenisz poniższe kryteria, zweryfikuj zgodność zestawu. Jeśli warunek nie jest spełniony, <u>całą sekcję Hive oceniasz na 0 pkt</u>.</span>
+      <ul class="gate-conditions">
+        <li>Przypisany Tobie zestaw musi być zgodny z faktycznie dostarczonymi plikami.</li>
+		<li>Implementacja zawiera realne rozwiązanie zgodne Twoim zestawem (a nie przykładowy lub losowy) zestaw plików 
+		nie mających wiele wspólnego z poprawnym rozwiązaniem dla Twojego zestawu.</li>
+		<li>Implementacja nie zawiera fundamentalnych i oczywistych błędów uniemożliwiających jej użycie (także po dostosowaniu) czy nawet adekwatną ocenę.</li>
+      </ul>
+    </div>
+  </div>
+  
+  <table class="ct hv">
+    <thead>
+      <tr>
+        <th style="width:42px">#</th>
+        <th style="width:42px; text-align:center">W</th>
+        <th>Kryterium</th>
+        <th><span class="badge yes">TAK</span> – warunki spełnienia</th>
+        <th><span class="badge no">NIE</span> – przykłady niespełnienia</th>
+        <th style="width:11%"><span class="badge na">N/D</span></th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <tr class="gr"><td colspan="6">II.A &nbsp;Definicja struktur danych</td></tr>
+
+      <tr>
+        <td class="cc">H01</td>
+        <td class="cw"><div class="wt w2h">1</div></td>
+        <td class="ct-title">Tabele źródłowe poprawnie zdefiniowane – nazwy atrybutów i typy zgodne ze specyfikacją</td>
+        <td class="cy">
+          <span class="vh y">TAK gdy:</span>
+          <ul class="dl">
+            <li>Tabela dla danych z MapReduce ma atrybuty o <strong>nazwach zgodnych ze specyfikacją zestawu</strong> i właściwymi typami.</li>
+            <li>Tabela dla <code>datasource4</code> odzwierciedla strukturę słownika z opisu zestawu.</li>
+            <li>Obie tabele wskazują dane przez parametry ścieżek (nie wartości wpisane na stałe) (lub dane do nich ładowane są z miejsc wskazywanych przez parametry).</li>
+          </ul>
+        </td>
+        <td class="cn">
+          <span class="vh n">NIE gdy:</span>
+          <ul class="dl">
+            <li>Nazwy atrybutów tabeli MR niezgodne ze specyfikacją.</li>
+            <li>Błędne typy uniemożliwiają poprawne obliczenia.</li>
+            <li>Ścieżki wpisane na stałe.</li>
+          </ul>
+        </td>
+        <td class="cna">–</td>
+      </tr>
+
+      <tr class="perf-stripe">
+        <td class="cc">H02</td>
+        <td class="cw"><div class="wt">1</div></td>
+        <td class="ct-title">Dane źródłowe dostępne przez <code>EXTERNAL TABLE … LOCATION</code>, nie przez <code>LOAD DATA</code> <span class="ptag">⚡</span></td>
+        <td class="cy">
+          <span class="vh y">TAK gdy:</span>
+          <ul class="dl">
+            <li>Do obu źródeł danych używane jest <code>CREATE EXTERNAL TABLE … STORED AS … LOCATION '…'</code>.</li>
+            <li>Dane źródłowe nie są fizycznie kopiowane ani przenoszone przez instrukcje <code>LOAD DATA</code>.</li>
+          </ul>
+        </td>
+        <td class="cn">
+          <span class="vh n">NIE gdy:</span>
+          <ul class="dl">
+            <li>Użyto <code>LOAD DATA INPATH</code> lub <code>LOAD DATA LOCAL INPATH</code> – dane są fizycznie przenoszone lub kopiowane, co jest kosztowne i narusza zasadę wskazania danych w miejscu.</li>
+          </ul>
+        </td>
+        <td class="cna">–</td>
+      </tr>
+
+      <tr>
+        <td class="cc">H03</td>
+        <td class="cw"><div class="wt">1</div></td>
+        <td class="ct-title">Skrypt HQL jest powtarzalny – każda trwała struktura poprzedzona <code>DROP … IF EXISTS</code></td>
+        <td class="cy">
+          <span class="vh y">TAK gdy:</span>
+          <ul class="dl">
+            <li>Przed każdą instrukcją <code>CREATE TABLE</code> / <code>CREATE VIEW</code> znajduje się <code>DROP … IF EXISTS</code>.</li>
+            <li>Ponowne uruchomienie skryptu nie generuje błędów o istniejących strukturach.</li>
+          </ul>
+        </td>
+        <td class="cn">
+          <span class="vh n">NIE gdy:</span>
+          <ul class="dl">
+            <li>Brak <code>DROP IF EXISTS</code> – drugie uruchomienie kończy się błędem np. „Table already exists".</li>
+          </ul>
+        </td>
+        <td class="cna">–</td>
+      </tr>
+
+      <tr>
+        <td class="cc">H04</td>
+        <td class="cw"><div class="wt">1</div></td>
+        <td class="ct-title">Po wykonaniu skryptu struktury danych źródłowych pozostają dostępne</td>
+        <td class="cy">
+          <span class="vh y">TAK gdy:</span>
+          <ul class="dl">
+            <li>Tabele definiujące dane źródłowe (wynik MR i datasource4) nie są usuwane na końcu skryptu.</li>
+            <li>Po zakończeniu przepływu można odpytać te tabele w celu weryfikacji danych (debugowania).</li>
+          </ul>
+        </td>
+        <td class="cn">
+          <span class="vh n">NIE gdy:</span>
+          <ul class="dl">
+            <li>Skrypt finalnie usuwa tabele źródłowe – weryfikacja danych źródłowych po jego uruchomieniu niemożliwa.</li>
+          </ul>
+        </td>
+        <td class="cna">–</td>
+      </tr>
+
+      <tr class="gr-perf"><td colspan="6">II.B &nbsp;Wydajność przetwarzania <span class="ptag">⚡ wydajność</span></td></tr>
+
+      <tr class="perf-stripe">
+        <td class="cc">H05</td>
+        <td class="cw"><div class="wt w2h">2</div></td>
+        <td class="ct-title">Brak zbędnych tabel pośrednich i wielokrotnego odczytu tych samych danych <span class="ptag">⚡</span></td>
+        <td class="cy">
+          <span class="vh y">TAK gdy:</span>
+          <ul class="dl">
+            <li>Dane źródłowe są odczytywane jednorazowo – wynik uzyskiwany jest w jednym złożonym zapytaniu lub przez CTE / podzapytania w jednym przebiegu.</li>
+            <li>Brak tabel pośrednich tworzonych wyłącznie po to, by przechować częściowy wynik do kolejnego <code>SELECT</code>.</li>
+            <li>Brak instrukcji <code>INSERT INTO tabela_posrednia SELECT … FROM zrodlo</code> tworzących serię kroków przetwarzania, gdy możliwe było jedno złożone zapytanie.</li>
+          </ul>
+        </td>
+        <td class="cn">
+          <span class="vh n">NIE gdy:</span>
+          <ul class="dl">
+            <li>Skrypt tworzy kilka tabel pośrednich ładowanych przez serię oddzielnych jobów (np. <code>CREATE TABLE t1 AS SELECT … FROM source; CREATE TABLE t2 AS SELECT … FROM t1</code>).</li>
+            <li>Te same dane źródłowe odczytywane wielokrotnie w osobnych zapytaniach.</li>
+			<li>Te same dane źródłowe odczytywane wielokrotnie w jednym zapytaniu.</li>
+            <li>Dane kopiowane do nowych tabel przed przetworzeniem.</li>
+          </ul>
+        </td>
+        <td class="cna">–</td>
+      </tr>
+
+      <tr class="gr"><td colspan="6">II.C &nbsp;Przetwarzanie – podstawowe</td></tr>
+
+      <tr>
+        <td class="cc">H06</td>
+        <td class="cw"><div class="wt w2h">1</div></td>
+        <td class="ct-title">JOIN danych z wyników MapReduce i datasource4 jest poprawny</td>
+        <td class="cy">
+          <span class="vh y">TAK gdy:</span>
+          <ul class="dl">
+            <li>Złączenie odbywa się na właściwym polu klucza obcego (np. <code>hotel_id</code>).</li>
+            <li>Typ JOIN odpowiedni – dane bez odpowiednika w słowniku obsługiwane zgodnie z wymaganiami zestawu.</li>
+          </ul>
+        </td>
+        <td class="cn">
+          <span class="vh n">NIE gdy:</span>
+          <ul class="dl">
+            <li>JOIN na błędnym polu (np. nazwy zamiast identyfikatora).</li>
+            <li>Brak JOIN – dane ze słownika nie są dołączone.</li>
+          </ul>
+        </td>
+        <td class="cna">–</td>
+      </tr>
+
+      <tr>
+        <td class="cc">H07</td>
+        <td class="cw"><div class="wt w2h">2</div></td>
+        <td class="ct-title">Agregacje wykonane na wymaganym poziomie grupowania z poprawnymi funkcjami</td>
+        <td class="cy">
+          <span class="vh y">TAK gdy:</span>
+          <ul class="dl">
+            <li><code>GROUP BY</code> zawiera wszystkie i tylko pola wymagane przez specyfikację zestawu.</li>
+            <li>Funkcje agregujące są właściwe (<code>SUM</code>, <code>COUNT</code>, <code>AVG</code>); współczynniki (np. <code>cancelled_ratio</code>) obliczone zgodnie z definicją z opisu zestawu.</li>
+          </ul>
+        </td>
+        <td class="cn">
+          <span class="vh n">NIE gdy:</span>
+          <ul class="dl">
+            <li>Brakuje pola w <code>GROUP BY</code> lub <code>GROUP BY</code> obejmuje zbędne pola.</li>
+            <li>Błędna funkcja agregująca lub błędne obliczenia wyników.</li>
+          </ul>
+        </td>
+        <td class="cna">–</td>
+      </tr>
+
+      <tr>
+        <td class="cc">H08</td>
+        <td class="cw"><div class="wt w2h">2</div></td>
+        <td class="ct-title">Wynik zawiera wszystkie wymagane atrybuty i poprawne wartości</td>
+        <td class="cy">
+          <span class="vh y">TAK gdy:</span>
+          <ul class="dl">
+            <li>Wszystkie atrybuty wynikowe wymagane w opisie zestawu są obecne, z poprawnymi nazwami.</li>
+            <li>Wartości miar są poprawne i spójne (logicznie sensowne; wskaźniki między 0 a 1; wynik ma właściwą liczbę wierszy).</li>
+          </ul>
+        </td>
+        <td class="cn">
+          <span class="vh n">NIE gdy:</span>
+          <ul class="dl">
+            <li>Brakuje atrybutów lub ich nazwy są niezgodne ze specyfikacją.</li>
+            <li>Wartości błędne lub logicznie niemożliwe.</li>
+          </ul>
+        </td>
+        <td class="cna">–</td>
+      </tr>
+
+      <!-- ALPHA GROUP -->
+      <tr class="gr-alpha">
+        <td colspan="6">
+          II.D &nbsp;Operacje zaawansowane – Grupa α: Funkcje analityczne
+          <div class="grp-note alpha">Każdy zestaw danych wymaga co najmniej jednej z poniższych operacji. Jeśli konkretna funkcja nie występuje w Twoim zestawie – to kryterium oznaczasz N/D i przyznajesz punkty automatycznie.</div>
+        </td>
+      </tr>
+
+      <tr>
+        <td class="cc">H09</td>
+        <td class="cw"><div class="wt w2h">2</div></td>
+        <td class="ct-title">
+          Ranking <code>RANK() OVER (PARTITION BY … ORDER BY …)</code> zastosowany poprawnie
+          <span class="ctag">N/D jeśli nie dotyczy</span>
+        </td>
+        <td class="cy">
+          <span class="vh y">TAK gdy:</span>
+          <ul class="dl">
+            <li><code>RANK()</code> (lub <code>ROW_NUMBER()</code> jeśli uzasadnione) użyta z właściwym <code>PARTITION BY</code> (wymagany poziom grupowania rankingu) i <code>ORDER BY</code> (właściwa miara, właściwy kierunek).</li>
+            <li>Wynikowa kolumna rankingu zgodna z opisem zestawu.</li>
+          </ul>
+        </td>
+        <td class="cn">
+          <span class="vh n">NIE gdy:</span>
+          <ul class="dl">
+            <li>Błędny <code>PARTITION BY</code> lub <code>ORDER BY</code>.</li>
+            <li>Ranking zastąpiony ręcznym numerowaniem bez funkcji okienkowej.</li>
+          </ul>
+        </td>
+        <td class="cna"><span class="na-txt">Brak rankingu w zestawie → punkty automatycznie.</span></td>
+      </tr>
+
+      <tr>
+        <td class="cc">H10</td>
+        <td class="cw"><div class="wt w2h">2</div></td>
+        <td class="ct-title">
+          Inna złożona funkcja okienkowa (bez funkcji rankingu): np: średnia cross-group, odchylenie lub flaga powyżej/poniżej średniej
+          <span class="ctag">N/D jeśli nie dotyczy</span>
+        </td>
+        <td class="cy">
+          <span class="vh y">TAK gdy:</span>
+          <ul class="dl">
+		    <li>Inna złożona funkcja okienkowa użyta z właściwymi parametrami, właściwym <code>PARTITION BY</code> (wymagany poziom grupowania rankingu) i <code>ORDER BY</code> (jeśli dotyczy) - właściwe parametry, podział na partycje i ewentualny porządek wierszy w partycjach)</li>
+            <li>Przykładowo: <code>AVG() OVER (PARTITION BY …)</code> oblicza średnią na żądanym poziomie grupowania (np. średnia dla wszystkich rekordów tej samej kategorii).</li>
+            <li>Przykładowo: Odchylenie = różnica wartości bieżącej grupy i tej średniej.</li>
+            <li>Przykładowo: Flaga (true/false) poprawnie porównuje wartość z obliczoną średnią.</li>
+          </ul>
+        </td>
+        <td class="cn">
+          <span class="vh n">NIE gdy:</span>
+          <ul class="dl">
+            <li>Błędny <code>PARTITION BY</code> (np. globalna średnia zamiast wymaganego poziomu podziału).</li>
+            <li>Odchylenie / flaga obliczone przez osobne zapytanie bez funkcji okienkowej.</li>
+          </ul>
+        </td>
+        <td class="cna"><span class="na-txt">Brak innej złożonej funkcji analitycznej operacji w zestawie → punkty automatycznie.</span></td>
+      </tr>
+
+      <!-- BETA GROUP -->
+      <tr class="gr-beta">
+        <td colspan="6">
+          II.E &nbsp;Operacje zaawansowane – Grupa β: Dane złożone i filtry
+          <div class="grp-note beta">Poniższe kryteria dotyczą konkretnych operacji zdefiniowanych w Twoim zestawie. Jeśli dana operacja nie jest wymagana – kryterium N/D i punkty automatycznie.</div>
+        </td>
+      </tr>
+
+      <tr>
+        <td class="cc">H11</td>
+        <td class="cw"><div class="wt">1</div></td>
+        <td class="ct-title">
+          Rozwinięcie pola wielowartościowego (<code>LATERAL VIEW EXPLODE</code>) zastosowane poprawnie
+          <span class="ctag">N/D jeśli nie dotyczy</span>
+        </td>
+        <td class="cy">
+          <span class="vh y">TAK gdy:</span>
+          <ul class="dl">
+            <li>Pole z listą wartości rozdzielonych separatorem (np. lista gatunków, lista cech, lista produktów) rozwinięte przez <code>LATERAL VIEW EXPLODE(SPLIT(kolumna, separator))</code>.</li>
+            <li>Dalsze przetwarzanie odbywa się na poziomie pojedynczych elementów listy.</li>
+          </ul>
+        </td>
+        <td class="cn">
+          <span class="vh n">NIE gdy:</span>
+          <ul class="dl">
+            <li>Pole wielowartościowe traktowane jako jeden ciąg znaków; brak <code>EXPLODE</code> lub błędny separator.</li>
+          </ul>
+        </td>
+        <td class="cna"><span class="na-txt">Brak pola wielowartościowego w zestawie → punkty automatycznie.</span></td>
+      </tr>
+
+      <tr>
+        <td class="cc">H12</td>
+        <td class="cw"><div class="wt">1</div></td>
+        <td class="ct-title">
+          Zagnieżdżona kolekcja rekordów (<code>ARRAY&lt;STRUCT&lt;&gt;&gt;</code>) w kolumnie wynikowej
+          <span class="ctag">N/D jeśli nie dotyczy</span>
+        </td>
+        <td class="cy">
+          <span class="vh y">TAK gdy:</span>
+          <ul class="dl">
+            <li>Wymagana kolumna wynikowa (np. ranking marek) zbudowana jako zagnieżdżona kolekcja przez <code>COLLECT_LIST(NAMED_STRUCT(…))</code> lub równoważny mechanizm.</li>
+            <li>Kolekcja zawiera wszystkie atrybuty zagnieżdżonych rekordów wymagane przez opis zestawu.</li>
+          </ul>
+        </td>
+        <td class="cn">
+          <span class="vh n">NIE gdy:</span>
+          <ul class="dl">
+            <li>Zagnieżdżona struktura zastąpiona prostą konkatenacją tekstową.</li>
+            <li>Brakuje wymaganych atrybutów w zagnieżdżonych rekordach.</li>
+          </ul>
+        </td>
+        <td class="cna"><span class="na-txt">Brak wymaganej kolekcji zagnieżdżonej w zestawie → punkty automatycznie.</span></td>
+      </tr>
+
+      <tr>
+        <td class="cc">H13</td>
+        <td class="cw"><div class="wt">1</div></td>
+        <td class="ct-title">
+          Filtrowanie wyniku na podstawie wartości analitycznej lub obliczenie udziału procentowego
+          <span class="ctag">N/D jeśli nie dotyczy</span>
+        </td>
+        <td class="cy">
+          <span class="vh y">TAK gdy:</span>
+          <ul class="dl">
+            <li><em>Filtr na podstawie wyniku funkcji analitycznej:</em> wynik jest ograniczony do wierszy, w których wartość bieżącego rekordu spełnia warunek względem wartości wyniku funkcji analitycznej.</li>
+          </ul>
+        </td>
+        <td class="cn">
+          <span class="vh n">NIE gdy:</span>
+          <ul class="dl">
+            <li>Filtr / udział obliczony przez oddzielne zapytanie z JOIN zamiast przez funkcję analityczną.</li>
+            <li>Błędny warunek filtrowania (np. odwrócony znak porównania).</li>
+          </ul>
+        </td>
+        <td class="cna"><span class="na-txt">Brak tej operacji w zestawie → punkty automatycznie.</span></td>
+      </tr>
+
+      <tr class="gr"><td colspan="6">II.F &nbsp;Skrypt uruchamiający i wynik końcowy</td></tr>
+	  
+	  <tr>
+        <td class="cc">M14</td>
+        <td class="cw"><div class="wt">1</div></td>
+        <td class="ct-title">Skrypt run_hive.sh poprawnie uruchamia usługę Hive i obsługuje parametry ścieżek</td>
+        <td class="cy">
+          <span class="vh y">TAK gdy:</span>
+          <ul class="dl">
+            <li>Skrypt akceptuje i przekazuje parametry <code>input_dir3</code>, <code>input_dir4</code> i <code>output_dir6</code>.</li>
+			<li>Skrypt korzysta z <code>beeline</code> a nie bezpośredniego (przestarzałego) wywołania <code>hive</code>.</li>
+          </ul>
+        </td>
+        <td class="cn">
+          <span class="vh n">NIE gdy:</span>
+          <ul class="dl">
+            <li>Ścieżki wpisane na stałe.</li>
+			<li>Brak poprawnej obsługi wymaganych parametrów.</li>
+			<li>Wykorzystanie <code>hive</code> zamiast <code>beeline</code>.</li>
+          </ul>
+        </td>
+        <td class="cna">–</td>
+      </tr>
+
+      <tr>
+        <td class="cc">H15</td>
+        <td class="cw"><div class="wt">1</div></td>
+        <td class="ct-title">Każdy rekord wynikowy zapisany w formacie JSON przez mechanizm SerDe</td>
+        <td class="cy">
+          <span class="vh y">TAK gdy:</span>
+          <ul class="dl">
+            <li>Dane wynikowe zapisane w katalogu HDFS wskazanym przez parametr <code>output_dir6</code> w formacie JSON na poziomie rekordu.</li>
+            <li>Format JSON generowany przez SerDe (np. <code>org.apache.hive.hcatalog.data.JsonSerDe</code> lub inny dostępny w danym środowisku), nie przez ręczne konkatenowanie ciągów.</li>
+          </ul>
+        </td>
+        <td class="cn">
+          <span class="vh n">NIE gdy:</span>
+          <ul class="dl">
+            <li>Wynik w formacie CSV lub innym, a nie JSON.</li>
+            <li>JSON skonstruowany przez <code>CONCAT</code> / interpolację ciągów lub inny "ręczny" sposób zamiast SerDe.</li>
+          </ul>
+        </td>
+        <td class="cna">–</td>
+      </tr>
+
+    </tbody>
+  </table>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════
+     III. WORKFLOW
+══════════════════════════════════════════════════ -->
+<div class="section">
+  <div class="sec-head wf">
+    <h2>III. Przepływ Apache Airflow</h2>
+    <span class="spts">10 pkt</span>
+  </div>
+  
+  <!-- GATE -->
+  <div class="gate-banner">
+    <div class="gate-icon">⛔</div>
+    <div class="gate-text">
+      <strong>WARUNEK KONIECZNY – Realna implementacja (nie punktowane)</strong>
+      <span>Zanim ocenisz poniższe kryteria, zweryfikuj czy oceniany plik przepływu zawiera realną implementację</u>.<br/></span>
+	  <span>Jeśli warunek nie jest spełniony, <u>całą sekcję Przepływ Apache Airflow oceniasz na 0 pkt</u>.</span>
+      <ul class="gate-conditions">
+        <li>Implementacja zawiera realne rozwiązanie - nie jest przykładowo źródłowym plikiem przepływu 
+		niezawierającym zmian wynikających z jego wykorzystania do orkiestracji zadań projektu.</li>
+		<li>Implementacja nie zawiera fundamentalnych i oczywistych błędów uniemożliwiających jej użycie (także po dostosowaniu) czy nawet adekwatną ocenę.</li>
+      </ul>
+    </div>
+  </div>
+  
+  <table class="ct wf">
+    <thead>
+      <tr>
+        <th style="width:42px">#</th>
+        <th style="width:42px; text-align:center">W</th>
+        <th>Kryterium</th>
+        <th><span class="badge yes">TAK</span> – warunki spełnienia</th>
+        <th><span class="badge no">NIE</span> – przykłady niespełnienia</th>
+        <th style="width:11%"><span class="badge na">N/D</span></th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <tr class="gr"><td colspan="6">III.A &nbsp;Konfiguracja operatorów i parametrów</td></tr>
+
+      <tr>
+        <td class="cc">W01</td>
+        <td class="cw"><div class="wt">1</div></td>
+        <td class="ct-title">Parametr wariantu MR ma domyślną wartość zgodną z implementacją</td>
+        <td class="cy">
+          <span class="vh y">TAK gdy:</span>
+          <ul class="dl"><li>Parametr <code>classic_or_streaming</code> ma wartość domyślną (<code>classic</code> lub <code>streaming</code>) zgodną z zaimplementowanym wariantem.</li></ul>
+        </td>
+        <td class="cn">
+          <span class="vh n">NIE gdy:</span>
+          <ul class="dl"><li>Wartość domyślna niezgodna – przepływ domyślnie uruchamia zły wariant.</li></ul>
+        </td>
+        <td class="cna">–</td>
+      </tr>
+
+      <tr>
+        <td class="cc">W02</td>
+        <td class="cw"><div class="wt">1</div></td>
+        <td class="ct-title">Polecenie operatora MapReduce zgodne ze skryptem i poprawnie używa parametrów ścieżek</td>
+        <td class="cy">
+          <span class="vh y">TAK gdy:</span>
+          <ul class="dl">
+            <li>Polecenie w operatorze (<code>mapreduce_classic</code> lub <code>hadoop_streaming</code>) funkcjonalnie zgodne ze skryptem <code>run_mr.sh</code>.</li>
+            <li>Ścieżki przekazywane przez parametry: <code>{{ params.dags_home }}</code>, <code>{{ params.input_dir }}</code>, <code>{{ params.output_mr_dir }}</code>.</li>
+          </ul>
+        </td>
+        <td class="cn">
+          <span class="vh n">NIE gdy:</span>
+          <ul class="dl"><li>Polecenie niezgodne ze skryptem lub ścieżki wpisane na stałe.</li></ul>
+		  <ul class="dl"><li>Zawarto wywołanie skryptu <code>run_mr.sh</code>.</li></ul>
+        </td>
+        <td class="cna">–</td>
+      </tr>
+
+      <tr>
+        <td class="cc">W03</td>
+        <td class="cw"><div class="wt">1</div></td>
+        <td class="ct-title">Polecenie operatora Hive zgodne ze skryptem i poprawnie używa wszystkich parametrów ścieżek</td>
+        <td class="cy">
+          <span class="vh y">TAK gdy:</span>
+          <ul class="dl">
+            <li>Polecenie w operatorze <code>hive</code> zgodne ze skryptem <code>run_hive.sh</code>.</li>
+            <li>Wszystkie trzy wymagane ścieżki (<code>output_mr_dir</code>, <code>input_dir</code>, <code>output_dir</code>) przekazywane przez parametry przepływu.</li>
+          </ul>
+        </td>
+        <td class="cn">
+          <span class="vh n">NIE gdy:</span>
+          <ul class="dl"><li>Brakuje ścieżki, jest wpisana na stałe lub polecenie niezgodne ze skryptem.</li></ul>
+        </td>
+        <td class="cna">–</td>
+      </tr>
+
+      <tr class="gr"><td colspan="6">III.B &nbsp;Integralność struktury DAG</td></tr>
+
+      <tr>
+        <td class="cc">W04</td>
+        <td class="cw"><div class="wt">1</div></td>
+        <td class="ct-title">Elementy niewymagające modyfikacji pozostają niezmienione lub zmiany są uzasadnione</td>
+        <td class="cy">
+          <span class="vh y">TAK gdy:</span>
+          <ul class="dl">
+            <li>Operatory <code>clean_output_mr_dir</code>, <code>clean_output_dir</code>, <code>pick_classic_or_streaming</code>, <code>get_output</code> niezmienione.</li>
+            <li>Zależności między operatorami (kolejność wykonania) niezmienione.</li>
+            <li>Ewentualne zmiany w tych elementach są uzasadnione i nie zaburzają logiki.</li>
+          </ul>
+        </td>
+        <td class="cn">
+          <span class="vh n">NIE gdy:</span>
+          <ul class="dl"><li>Zmieniono operatory czyszczące / wyboru wariantu bez uzasadnienia lub zmodyfikowano zależności.</li></ul>
+        </td>
+        <td class="cna">–</td>
+      </tr>
+
+      <tr class="gr-perf"><td colspan="6">III.C &nbsp;Wydajność wykonania <span class="ptag">⚡ wydajność</span></td></tr>
+
+      <tr class="perf-stripe">
+        <td class="cc">W05</td>
+        <td class="cw"><div class="wt">1</div></td>
+        <td class="ct-title">Przepływ nie zawiera zbędnych operatorów ani operacji niepotrzebnie wykorzystujących zasoby <span class="ptag">⚡</span></td>
+        <td class="cy">
+          <span class="vh y">TAK gdy:</span>
+          <ul class="dl">
+            <li>Brak dodatkowych operatorów pobierających dane wejściowe, rozpakowujących archiwa, ładujących dane itp. (dane źródłowe są z założenia dostępne we wskazanym miejscu).</li>
+            <li>Brak zbędnych operacji blokujących lub duplikujących pracę już wykonaną przez istniejące operatory.</li>
+          </ul>
+        </td>
+        <td class="cn">
+          <span class="vh n">NIE gdy:</span>
+          <ul class="dl">
+            <li>Dodano operatory pobierające dane źródłowe lub wykonujące operacje niewymagane przez specyfikację przepływu.</li>
+            <li>Przepływ wykonuje zbędne operacje, np. kopiowanie danych do HDFS, które powinno być wykonane przed uruchomieniem.</li>
+          </ul>
+        </td>
+        <td class="cna">–</td>
+      </tr>
+	  
+	  <tr class="gr"><td colspan="6">III.D &nbsp;Poprawnność przetwarzania </td></tr>
+
+      <tr>
+        <td class="cc">W06</td>
+        <td class="cw"><div class="wt w2">2</div></td>
+        <td class="ct-title">Przepływ wykonuje się w całości bez błędów – wszystkie taski kończą się sukcesem</td>
+        <td class="cy">
+          <span class="vh y">TAK gdy:</span>
+          <ul class="dl">
+            <li>Po uruchomieniu z Airflow UI wszystkie taski uzyskują status <em>Success</em> - bez błędów po stronie autora.</li>
+            <li>Brak konieczności ręcznej interwencji w trakcie wykonania.</li>
+          </ul>
+        </td>
+        <td class="cn">
+          <span class="vh n">NIE gdy:</span>
+          <ul class="dl"><li>Jeden lub więcej tasków kończy się statusem <em>Failed</em> lub wymaga ręcznej naprawy (ze względu na błędy po stronie autora).</li></ul>
+        </td>
+        <td class="cna">–</td>
+      </tr>
+
+      <tr>
+        <td class="cc">W07</td>
+        <td class="cw"><div class="wt">1</div></td>
+        <td class="ct-title">Przepływ jest powtarzalny – drugie uruchomienie kończy się sukcesem bez ingerencji</td>
+        <td class="cy">
+          <span class="vh y">TAK gdy:</span>
+          <ul class="dl">
+            <li>Ponowne uruchomienie całego przepływu bez ręcznych operacji kończy się sukcesem.</li>
+            <li>Operatory czyszczące HDFS działają poprawnie przy ponownym uruchomieniu.</li>
+          </ul>
+        </td>
+        <td class="cn">
+          <span class="vh n">NIE gdy:</span>
+          <ul class="dl"><li>Drugie uruchomienie wymaga ręcznego usunięcia katalogów lub tabel przed startem.</li></ul>
+        </td>
+        <td class="cna">–</td>
+      </tr>
+
+      <tr>
+        <td class="cc">W08</td>
+        <td class="cw"><div class="wt w2">2</div></td>
+        <td class="ct-title">Task <code>get_output</code> prezentuje w logu poprawny wynik końcowy przetwarzania</td>
+        <td class="cy">
+          <span class="vh y">TAK gdy:</span>
+          <ul class="dl">
+            <li>W logu tasku <code>get_output</code> widoczne są rekordy JSON będące wynikiem przetwarzania.</li>
+            <li>Liczba i zawartość rekordów jest logicznie sensowna (nie pusta, nie zawiera wyłącznie komunikatów błędów).</li>
+          </ul>
+        </td>
+        <td class="cn">
+          <span class="vh n">NIE gdy:</span>
+          <ul class="dl">
+            <li>Log jest pusty lub zawiera tylko błędy.</li>
+            <li>Dane w logu nie są w formacie JSON.</li>
+          </ul>
+        </td>
+        <td class="cna">–</td>
+      </tr>
+
+    </tbody>
+  </table>
+</div>
+
+<div class="grand">
+  <span class="label">Suma maksymalna · 35 kryteriów binarnych + 1 warunek konieczny</span>
+  <span class="val">50 pkt</span>
+</div>
+
+</body>
+</html>

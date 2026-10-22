@@ -50,5 +50,10 @@ Wynik `(6)` powinien zawierać następujące atrybuty:
 
 ---
 
-Cyfry w nawiasach odnoszą się do cyfr wykorzystanych na graficznej reprezentacji projektu
-– patrz opis projektu na stronie kursu.
+## Uwagi
+
+* `avg_total_price` w Hive to średnia wartość po wszystkich zamówieniach w grupie.
+* Pozycja 1 w rankingu oznacza najwięcej zamówień. Równe wartości otrzymują tę samą pozycję,
+  a kolejna pozycja jest pomijana (np. 1, 2, 2, 4).
+* Wyniki `(3)` i `(6)` mogą zawierać dodatkowe atrybuty, pod warunkiem że zawierają wszystkie atrybuty wymagane.
+* Cyfry w nawiasach odnoszą się do cyfr wykorzystanych na graficznej reprezentacji projektu – patrz opis projektu na stronie kursu.
