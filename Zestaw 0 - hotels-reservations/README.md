@@ -51,7 +51,7 @@ Wynik `(6)` powinien zawierać następujące atrybuty:
 ## Uwagi
 
 * Rok rezerwacji wyznaczamy na podstawie `check_in`.
-* `cancelled_ratio` dotyczy wszystkich lat, a nie tylko roku 2024.
+* `cancelled_ratio` dotyczy wyłącznie rezerwacji rozpoczętych w 2024 roku.
 * Wynik obejmuje hotele z co najmniej jedną rezerwacją rozpoczętą w 2024 roku.
 * Pozycja 1 w rankingu oznacza najwyższy iloraz. Równe wartości otrzymują tę samą pozycję,
   a kolejna pozycja jest pomijana (np. 1, 2, 2, 4).
