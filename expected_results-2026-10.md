@@ -13,7 +13,7 @@
 
 | hotel_name        |   total_reservations |   avg_price |   cancelled_ratio |   rooms |   rank |
 |:------------------|---------------------:|------------:|------------------:|--------:|-------:|
-| Farrell Inc Hotel |                  488 |      1010.7 |          0.349431 |      50 |      1 |
+| Farrell Inc Hotel |                  488 |      1010.7 |          0.360656 |      50 |      1 |
 
 
 # Zestaw 11 - flights-airports
