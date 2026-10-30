@@ -42,7 +42,7 @@ Dodatkowo – w ramach każdego regionu – należy utworzyć ranking bohaterów
 liczby zwycięstw. Ranking powinien być reprezentowany jako tablica rekordów, w której każdy
 rekord zawiera:  
 * `hero_name` – nazwę bohatera,  
-* `rank_in_region` – pozycję bohatera w rankingu w ramach danego regionu.  
+* `rank_in_region` – pozycję bohatera w rankingu w ramach danego regionu.
 
 Wynik `(6)` powinien zawierać następujące atrybuty:  
 * `region` – region graczy,  
@@ -63,5 +63,6 @@ Wynik `(6)` powinien zawierać następujące atrybuty:
 * Średnią liczbę zwycięstw bohatera liczymy po regionach, w których bohater występuje.
 * Pozycja 1 w rankingu oznacza najwięcej zwycięstw. Równe wartości otrzymują tę samą pozycję,
   a kolejna pozycja jest pomijana (np. 1, 2, 2, 4). Kolejność rekordów w tablicy nie ma znaczenia.
+* Ranking bohaterów jest wartością, która będzie się powtarzała w rekordach wynikowych dotyczących tych samych regionów.
 * Wyniki `(3)` i `(6)` mogą zawierać dodatkowe atrybuty, pod warunkiem że zawierają wszystkie atrybuty wymagane.
 * Cyfry w nawiasach odnoszą się do cyfr wykorzystowanych na graficznej reprezentacji projektu – patrz opis projektu na stronie kursu.
