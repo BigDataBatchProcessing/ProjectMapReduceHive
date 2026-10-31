@@ -40,7 +40,7 @@ Dla każdego kraju i typu szpitala należy obliczyć:
 * łączną liczbę wizyt pacjentek o płci `Female`,  
 * liczbę unikalnych kodów chorób odnotowanych w danej grupie,  
 * odchylenie łącznej liczby pacjentów w danym kraju i typie szpitala od średniej tej wartości dla tego samego typu szpitala, 
-  liczonej po wszystkich krajach, w których ten typ szpitala występuje (patients_deviation).  
+  liczonej po wszystkich krajach, w których ten typ szpitala występuje (`patients_deviation`).
 
 Wynik `(6)` powinien zawierać następujące atrybuty:  
 * `country` – kraj,  
@@ -49,8 +49,8 @@ Wynik `(6)` powinien zawierać następujące atrybuty:
 * `avg_age` – średni wiek pacjentów,  
 * `female_count` – łączna liczba wizyt pacjentek o płci `Female`,  
 * `unique_diseases_count` – liczba unikalnych kodów chorób odnotowanych w danej grupie,  
-*  `patients_deviation` – różnica między wartością `total_patients` dla danego kraju i typu szpitala a średnią wartością 
-   `total_patients` dla tego samego typu szpitala, liczoną po wszystkich krajach, w których ten typ szpitala występuje. 
+* `patients_deviation` – różnica między wartością `total_patients` dla danego kraju i typu szpitala a średnią wartością 
+  `total_patients` dla tego samego typu szpitala, liczoną po wszystkich krajach, w których ten typ szpitala występuje. 
 
 ---
 
