@@ -35,12 +35,12 @@ Pole `unique_diseases` zawiera listę kodów chorób — należy je rozwinąć i
 liczbę unikalnych kodów chorób odnotowanych w danej grupie (`unique_diseases_count`).
 
 Dla każdego kraju i typu szpitala należy obliczyć:  
-* łączną liczbę pacjentów obsłużonych w kraju w ramach danego typu szpitala,  
+* łączną liczbę pacjentów obsłużonych w kraju w ramach danego typu szpitala (suma po wszystkich szpitalach danego typu w kraju i wszystkich latach),  
 * średni wiek pacjentów,  
 * łączną liczbę wizyt pacjentek o płci `Female`,  
 * liczbę unikalnych kodów chorób odnotowanych w danej grupie,  
-* odchylenie liczby pacjentów w danym kraju i typie szpitala od średniej liczby pacjentów
-  dla tego samego typu szpitala we wszystkich krajach (`patients_deviation`).  
+* odchylenie łącznej liczby pacjentów w danym kraju i typie szpitala od średniej tej wartości dla tego samego typu szpitala, 
+  liczonej po wszystkich krajach, w których ten typ szpitala występuje (patients_deviation).  
 
 Wynik `(6)` powinien zawierać następujące atrybuty:  
 * `country` – kraj,  
@@ -49,13 +49,14 @@ Wynik `(6)` powinien zawierać następujące atrybuty:
 * `avg_age` – średni wiek pacjentów,  
 * `female_count` – łączna liczba wizyt pacjentek o płci `Female`,  
 * `unique_diseases_count` – liczba unikalnych kodów chorób odnotowanych w danej grupie,  
-* `patients_deviation` – różnica między liczbą pacjentów w danym kraju i typie szpitala
-  a średnią liczbą pacjentów dla tego samego typu szpitala we wszystkich krajach.  
+*  `patients_deviation` – różnica między wartością `total_patients` dla danego kraju i typu szpitala a średnią wartością 
+   `total_patients` dla tego samego typu szpitala, liczoną po wszystkich krajach, w których ten typ szpitala występuje. 
 
 ---
 
 ## Uwagi
 
 * `avg_age` w Hive to średni wiek po wszystkich wizytach w grupie.
+* `patients_deviation` wyznaczamy na podstawie `sum (total_patients)` na poziomie kraju i typu szpitala, a nie średnich na szpital.
 * Wyniki `(3)` i `(6)` mogą zawierać dodatkowe atrybuty, pod warunkiem że zawierają wszystkie atrybuty wymagane.
 * Cyfry w nawiasach odnoszą się do cyfr wykorzystanych na graficznej reprezentacji projektu – patrz opis projektu na stronie kursu.
