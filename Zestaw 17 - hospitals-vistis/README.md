@@ -57,6 +57,5 @@ Wynik `(6)` powinien zawierać następujące atrybuty:
 ## Uwagi
 
 * `avg_age` w Hive to średni wiek po wszystkich wizytach w grupie.
-* `patients_deviation` wyznaczamy na podstawie `sum (total_patients)` na poziomie kraju i typu szpitala, a nie średnich na szpital.
 * Wyniki `(3)` i `(6)` mogą zawierać dodatkowe atrybuty, pod warunkiem że zawierają wszystkie atrybuty wymagane.
 * Cyfry w nawiasach odnoszą się do cyfr wykorzystanych na graficznej reprezentacji projektu – patrz opis projektu na stronie kursu.
